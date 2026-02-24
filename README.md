@@ -28,12 +28,6 @@ $$SNR = 10 \log_{10} \left( \frac{P_{signal}}{P_{noise}} \right)$$
 ### Computer Vision (Stanford CS231n)
 Implementing CNN architectures to classify biological imaging data, focusing on backpropagation and gradient descent optimization.
 
----
-
-## 🛠️ Tech Stack & Environment
-- **OS**: CachyOS (Linux)
-- **Kernel**: Optimized for low-latency signal processing.
-- **Languages**: Python (NumPy, Scipy, PyTorch), Bash.
 
 ---
 
