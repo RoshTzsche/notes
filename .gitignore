@@ -1,0 +1,39 @@
+# --- Python & Data Science ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+.ipynb_checkpoints/
+.pytest_cache/
+
+# --- AI/ML Large Files ---
+# Don't upload heavy datasets or model weights to GitHub
+data/
+models/*.pth
+models/*.h5
+models/*.onnx
+*.pkl
+
+# extra 
+.obsidian
+# --- OS & Linux Specific (CachyOS/Hyprland) ---
+.DS_Store
+.fuse_hidden*
+*.swp
+*~
+.directory
+.Trash-*/
+
+# --- Privacy Guardrail ---
+# If you decided to keep these in the repo but not on GitHub:
+05_Archive_Personal/Journal/
+05_Archive_Personal/Poetry/
+
+# --- Hardware & IDEs ---
+.vscode/
+.idea/
+*.log
+build/
+dist/
