@@ -1,0 +1,1 @@
+Non-Maximum Suppression prunes spatially redundant predictions by enforcing an Intersection over Union (IoU) threshold. Bio-link: Analogous to lateral inhibition in retinal ganglion cells, where an actively firing neuron suppresses the action potentials of its immediate anatomical neighbors to maximize signal contrast and edge detection.
