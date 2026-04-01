@@ -15,7 +15,7 @@
   // Page Configuration (Updated to modern `context` syntax)
   set page(
     paper: "a4",
-    margin: (x: 1.25in, y: 1.25in),
+    margin: (x: .9in, y: 0.7in),
     header: context {
       if counter(page).get().first() > 1 {
         align(right)[#text(size: 8pt, fill: luma(120))[#course -- #title]]
@@ -25,10 +25,10 @@
   )
 
   // Global Typography
-  set text(font: "New Computer Modern", size: 11pt)
-  set par(justify: true, leading: 0.65em)
+  set text(font: "New Computer Modern", size: 12pt)
+  set par(justify: true, leading: 0.8em)
   show heading: set block(above: 1.5em, below: 1em)
-  set math.equation(numbering: "(1)")
+  set math.equation()
 
   // Title Block (Fixed argument syntax)
   align(center)[
@@ -44,7 +44,7 @@
   
   // Minimalist Divider
   v(1em)
-  line(length: 100%, stroke: 0.5pt + luma(150))
+  line(length: 100%, stroke: 1pt + luma(200))
   v(1.5em)
 
   body
@@ -54,12 +54,12 @@
 // CUSTOM ENVIRONMENTS
 // ==========================================
 #let problem(num, body) = block(above: 1.5em, below: 1.5em)[
-  *Problem #num:* \
+  -- *Problem #num:* \
   #body
 ]
 
 #let solution(body) = block(above: 1em, below: 1.5em)[
-  _Solution:_ \
+  ----- *_Solution:_* \
   #body
 ]
 
@@ -91,11 +91,99 @@
 
 #problem("2")[
   If $A$ is a set and $cal(B) = {B_i : i in I}$ is any family of sets, show that:
-  $ A inter union.big_(i in I)B_i = union.big_(i in I)(A inter B_i) and A union inter.big_(i in I)B_i =  inter.big_(i in I)(A union B_i) $
+  $ A inter union.big_(i in I)B_i = union.big_(i in I)(A inter B_i) "and" A union inter.big_(i in I)B_i =  inter.big_(i in I)(A union B_i) $
 ]
 
 #solution[
-  First part. 
-  Let $x in (A inter union.big_(i in I)B_i)$, so by definition of intersection we have $x in A and x in cal(B)$
-  what is $x in A and x in {B_i:i in I}$, therefore we have $x in A and x in B_j$ being $B_j$ an arbitrary set of $cal(B)$, so we have that $x in A inter B_j$, therefore $union.big_(i in I)(A inter B_i)$  
+  _First part._ 
+  
+  *Forward Direction* ($==>$): Let $x in (A inter union.big_(i in I)B_i)$. 
+  \ By definition of intersection we have $x in A and exists j in I "such that" x in B_j $, so we have that $x in A inter B_j$, if this element is in the intersection of a sole set of the family, is also true that is in the union of all sets in the family, therefore $x in union.big_(i in I)(A inter B_i)$  
+  
+  *Reverse Direction* ($<==$): Let $x in union.big_(i in I)(A inter B_i)$  \ We know that $exists j in I "such that "x in B_j inter A$, this is $x in A and x in B_j$, because $x$ is in any set of the family of sets, is also true that is in the union of the family, therefore $x in union.big_(i in I) B_i and x in A$, so we have that $x in A inter union.big_(i in I)B_i$
+
+
+  _Second part._
+
+  *Forward Direction* ($==>$): Let $x in A union inter.big_(i in I)B_i$
+  \ So $x in A space or space forall j in I, space x in B_j$ this is $x in A union B_j$, for this we know that $forall j in I, space x in A union B_j$, this is $inter.big_(i in I)(A union B_i)$
+
+  *Reverse Direction* ($<==$): Let $x in inter.big_(i in I)(A union B_i)$
+  \ so $forall j in I, space x in A union B_j$, so if $forall j in I, space x in A or x in B_j$,by Law of excluded middle we divide this in two cases:
+  + $x in.not A$
+    - If this is the case, then $x in B_j, forall j in I$ must be true, but this is trivially $x in A union inter.big_(i in I)B_i$
+  + $x in A$
+    - This is trivially $x in A or forall j in I, space x in B_j$ therefore $x in A union inter.big_(i in I)B_i$
+#align(right)[Q.E.D.]
+]
+#problem("3")[
+Let $B$ be any set. Show that $(A inter B) union C = A inter(B union C) <==> C ⊆A.$
+]
+
+#solution[
+*Forward Direction* ($==>$):  Assume $(A inter B) union C = A inter(B union C)$.
+
+Let $x in C$, by the definition of the union it follows that $x in (A inter B) union C$, we know by assumption that this is equall to $x in A inter (B union C)$, so $x in A and x in (B union C)$, for this expresion hold true we strictly require $x in A$, therefore $x in C => x in A$ thus $C subset.eq A$
+
+ *Reverse Direction* ($<==$): Assume $C subset.eq A$.
+ - *Forward inclusion*: $(A inter B) union C subset.eq A inter(B union C)$ 
+  - Let $x in (A inter B) union C$, this is $x in A inter B or x in C$.
+    - Case 1: $x in A inter B$, we have that $x in A and x in B$, and for definition of union it holds that $x in B union C$, therefore $x in A inter(B union C)$
+    - Case 2: $x in C$, for our assumption we know that this implies $x in A$, also we know for definition of union $x in B union C$, so $x in A and x in B union C$, therefore $x in A inter (B union C)$
+
+ - *Backward inclusion*: $(A inter B) union C supset.eq A inter(B union C)$ 
+  - Let $x in A inter (B union C)$, this is $x in A and x in B union C$
+    - Case 1: $x in B$, we know that $x in A$, this means $x in A inter B$, and for the definition of union $x in (A inter B) union C$ holds true
+    - Case 2: $x in.not B$, therefore $x in C$, so by definition of union $x in (A inter B) union C$ 
+#align(right)[Q.E.D.]
+  ]
+#problem("4")[
+The symmetric difference of two sets $A$ and $B$ is the set $D$ of all elements that belong to either $A$ or $B$
+but not both, symbolically, $ D equiv A Delta B = (A union B) - (A inter B) $ 
+\ Represent $D$ with a diagram and show that $D = (A - B) union (B - A)$.\ Furthermore, show that
+\ i) $A subset.eq A Delta B union A$,
+\ ii) $A subset.eq A Delta B union B$,
+\ iii) $B subset.eq A Delta B union A$,
+\ iv) $B subset.eq A Delta B union B$.
+]
+#solution[
+Show that $D = (A - B) union (B - A)$:
+\ Let $x in D$, this is $x in (A union B) - (A inter B)$,
+so we have $ x in A union B and x in.not A inter B ==> x in A union B and x in A^c union B^c $
+this is $ (x in A and x in A^c) or (x in B and x in A^c) and.big (x in A and x in B^c) or (x in B and x in B^c) $
+In the right side \ $(x in A and x in A^c) or (x in B and x in A^c) <==> "FALSE" or  (x in B and x in A^c) $
+$<==> x in B and x in A^c$
+$<==> x in B and x in.not A <==> x in (B - A)$
+\ In the left side \ $(x in A and x in B^c) or (x in B and x in B^c) <==> (x in A and x in B^c) or "FALSE" <==> x in A and x in B^c$
+$<==> x in A and x in.not B <==> x in (A - B)$
+\ joining both sides we got $  (A - B) union (B - A) $
+\ \ 
+\ i) $A subset.eq A Delta B union A$, \ Let $x in A$, for the definition of union $x in A Delta B union A$
+\ ii) $A subset.eq A Delta B union B$, \ Let $x in A$, thus $x in A union B$ by definition of union. We have two cases.
+\ Case 1: $x in B$ therefore $x in A Delta B union B$, by the definition of union.
+\ Case 2: $x in.not B$, we can't go directly as first case, instead we denote $x in A and x in.not B <==> x in A - B$ therefore by the first demonstration we got that $ x in (A - B) union (B - A) <==> x in A Delta B ==> x in A Delta B union B$
+\ iii) $B subset.eq A Delta B union A$, \ We procceed like in ii), let $x in B$
+\ iv) $B subset.eq A Delta B union B$. \ We procceed like in i) letting $x in B$
+#align(right)[Q.E.D.]
+]
+#problem("5")[
+  Show that if $f:A -> B "and" E,F subset.eq A$ then $f(E union F)=f(E) union f(F)$.
+]
+#solution[
+*Forward Direction ($==>$):*  Let $y in f(E union F)$, by the definition of the function we have $exists x in E union F$ such that $f(x) = y$ thus $x in E or x in F$, 
+  \ Case 1: $x in E => f(x) in f(E) <==> y in f(E) $
+  \ Case 2: $x in F => f(x) in f(F) <==> y in f(F)$
+  \ For this we have that $y in f(E) or y in f(F) ==> y in f(E) union f(F)$ thus $f(E union F) subset.eq f(E) union f(F)$
+  
+*Backward Direction ($<==$):* Let $y in f(E) union f(F) <==> y in f(E) or y in f(F)$ thus:
+\ Case 1: 
+
+Let $y in f(E) => exists x_E in E "such that" f(x_E) = y$
+by definition of union $x_E in E union F $ therefore $f(x_E) in f(E union F) <==> y in f(E union F)$
+\ Case 2: 
+
+Let $y in F space  exists x_F in F$ such that $f(x_F) = y ==> x_F in E union F$ therefore $f(x_F) in f(E union F) <==> y in f(E union F)$
+\ so we know that $f(E) union f(F) subset.eq f(E union F)$ 
+\ So we demonstrate that $f(E union F)=f(E) union f(F)$
+#align(right)[Q.E.D.]
 ]
