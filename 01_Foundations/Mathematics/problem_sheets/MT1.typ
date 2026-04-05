@@ -166,10 +166,13 @@ $<==> x in A and x in.not B <==> x in (A - B)$
 \ iv) $B subset.eq A Delta B union B$. \ We procceed like in i) letting $x in B$
 #align(right)[Q.E.D.]
 ]
+#pagebreak()
 #problem("5")[
-  Show that if $f:A -> B "and" E,F subset.eq A$ then $f(E union F)=f(E) union f(F)$.
+  Show that if $f:A -> B "and" E,F subset.eq A$ then $f(E union F)=f(E) union f(F)$ and $f(E inter F) subset.eq f(E) inter f(F).$
 ]
 #solution[
+  _First part:_
+  
 *Forward Direction ($==>$):*  Let $y in f(E union F)$, by the definition of the function we have $exists x in E union F$ such that $f(x) = y$ thus $x in E or x in F$, 
   \ Case 1: $x in E => f(x) in f(E) <==> y in f(E) $
   \ Case 2: $x in F => f(x) in f(F) <==> y in f(F)$
@@ -182,8 +185,15 @@ Let $y in f(E) => exists x_E in E "such that" f(x_E) = y$
 by definition of union $x_E in E union F $ therefore $f(x_E) in f(E union F) <==> y in f(E union F)$
 \ Case 2: 
 
-Let $y in F space  exists x_F in F$ such that $f(x_F) = y ==> x_F in E union F$ therefore $f(x_F) in f(E union F) <==> y in f(E union F)$
+Let $y in f(F) space  exists x_F in F$ such that $f(x_F) = y ==> x_F in E union F$ therefore $f(x_F) in f(E union F) <==> y in f(E union F)$
 \ so we know that $f(E) union f(F) subset.eq f(E union F)$ 
 \ So we demonstrate that $f(E union F)=f(E) union f(F)$
+
+_Second part:_
+
+Let $y in f(E inter F)$ for definition of function $exists x in E inter F$ such that $f(x) = y$ thus $ x in E and x in F$ 
+we know that for $x in E => f(x) in f(E) and x in F => f(x) in f(F)$
+therefore $f(x) in f(E) inter f(F) <=> y in f(E) inter f(E)$
+so we conclude that $f(E inter F) subset.eq f(E) inter f(F)$
 #align(right)[Q.E.D.]
 ]
