@@ -193,7 +193,67 @@ _Second part:_
 
 Let $y in f(E inter F)$ for definition of function $exists x in E inter F$ such that $f(x) = y$ thus $ x in E and x in F$ 
 we know that for $x in E => f(x) in f(E) and x in F => f(x) in f(F)$
-therefore $f(x) in f(E) inter f(F) <=> y in f(E) inter f(E)$
+therefore $f(x) in f(E) inter f(F) <=> y in f(E) inter f(F)$
 so we conclude that $f(E inter F) subset.eq f(E) inter f(F)$
 #align(right)[Q.E.D.]
 ]
+#problem("6")[Show that if $f : A -> B$ and $G, H$ are subset of $B$,  
+then $f^(−1)(G ∪H) = f^(−1)(G) ∪ f^(−1)(H) $ and 
+$ f^(−1)(G ∩H) = f^(−1)(G) ∩ f^(-1)(H)$
+
+]
+#solution[
+_First part:_
+  Let $a in f^(-1)(G union H) ==> f(a) in G union H$
+  \ Case 1: $f(a) in G <==> a in f^(-1) (G)$
+  \ Case 2: $f(a) in H <==> a in f^(-1) (H)$
+  \ Thus $a in f^(-1)(G) or a in f^(-1)(H) <==> a in f^(-1)(G) union f^(-1)(H)$ 
+  \  $therefore f^(−1)(G ∪H) subset.eq f^(−1)(G) ∪ f^(−1)(H)$
+  \ Let $a in f^(-1)(G) union f^(-1)(H) <==>  a in f^(-1)(G) or f^(-1)(H)<==> f(a) in G or f(a) in H $
+  \ Case 1: $f(a) in G <==> f(a) in G union H$ by definition of union, thus $a in f^(-1)(G union H)$
+  \ Case 2: $f(a) in H <==> f(a) in G union H$ by definition of union, thus $a in f^(-1)(G union H)$
+\ $therefore f^(−1)(G) union f^(-1)(H) subset.eq f^(−1)(G union H)$
+\ So we got: $ f^(−1)(G) union f^(-1)(H) = f^(−1)(G union H)$
+
+_Second part:_
+
+Let $a in f^(-1)(G inter H)$ for definition of preimage we got 
+\ $f(a) in G inter H <==> f(a) in G and f(a) in H$ 
+aplying again definition of preimage we got 
+\ $a in f^(-1)(G) and a in f^(-1)(H) <==> a in f^(-1)(G) inter f^(-1)(H) $
+\ $therefore f^(−1)(G ∩H) subset.eq f^(−1)(G) ∩ f^(-1)(H)$
+
+Let $a in f^(-1)(G) inter f^(-1)(H) <==> a in  f^(-1)(G) and a in f^(-1)(H) $
+\ by definition of preimage $f(a) in G and f(a) in H <==> f(a) in G inter H $ thus $a in f^(-1)(G inter H) $
+\ $therefore f^(−1)(G ∩H) supset.eq f^(−1)(G) ∩ f^(-1)(H)$
+\ So $f^(−1)(G ∩H) = f^(−1)(G) ∩ f^(-1)(H)$
+#align(right)[Q.E.D]
+] 
+
+#problem("7")[
+  Show that if $f : A -> B$ is injective and $E ⊆A$ [respectively, surjective and $H ⊆ B$], then $f^(-1)(f(E)) = E$
+[respectively, $f(f^(-1)(H)) = H$].
+]
+
+#solution[
+_First part:_\
+  Let $x in E ==> f(x) in f(E)$ and by definition of preimage $x in f^(-1)(f(E)) $ so we conclude that $E subset.eq f^(-1)(f(E)) $
+\ Let $x in f^(-1)(f(E)) $, this implies $f(x) in f(E)$ thus $exists y in E $ such that $f(y) = f(x)$ \ 
+recall the definition of injectiveness, $f(x_1) = f(x_2) ==> x_1 = x_2 $
+so if $f(y)=f(x) ==> x = y, $ therefore $f(y) in f(E) ==> y in E <==> x in E $
+
+_Second part:_\
+Let $y in f(f^(-1)(H)) $ by definition of image $exists x in f^(-1)(H) $ such that $y = f(x)$, 
+by definition of preimage it follows $f(x) in H$, 
+and this implies $y in H$ therefore $f(f^(-1)(H)) subset.eq H$
+
+Let $y in H$, because $H subset.eq B$, we know that $y$ is in the codomain, an using 
+the definition of surjectivity we know that $forall y in H, space exists x in A$ such that $y = f(x)$, thus we have $y in H <=> f(x) in H$ and aplying definition of preimage $x in f^(-1)(H) $, this implies by image definition that $f(x) in f(f^(-1)(H)) <==> y in f(f^(-1)(H)) $
+#align(right)[Q.E.D]
+]
+
+#problem("8")[
+  Show that if $f$ is a bijection from $A$ onto $B$, then $f^(-1) $ is a bijection of $B$ onto $A$. Moreover, if $g$ is a
+bijection of $B$ onto $C$, then the composite function $g ◦f$ is a bijection of $A$ onto $C$.
+]
+#solution[]
