@@ -1,0 +1,280 @@
+\documentclass[10pt, aspectratio=169]{beamer} % aspectratio=169 para pantallas modernas
+
+% --- Configuración del Tema ---
+\usetheme{metropolis}
+\usecolortheme{owl}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{hyperref}
+
+% --- Estilo de Código ---
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\scriptsize, 
+    keywordstyle=\color{teal}\bfseries,
+    commentstyle=\color{gray},
+    stringstyle=\color{orange},
+    breaklines=true,
+    showstringspaces=false,
+    backgroundcolor=\color{black!80},
+    frame=single,
+    rulecolor=\color{teal}
+}
+
+% --- Información del Título ---
+\title{Análisis Topológico de Señales Biomédicas}
+\subtitle{Motor de Procesamiento y Reconstrucción de Atractores EEG}
+\author{Rosh Guadiana P. - Lourdes M. García G. - Bárbara del R. Almazán B. - Edwin Montes O. - Osiris Díaz Torres}
+\date{\today}
+\institute{Biomédica y Topología}
+
+\begin{document}
+
+% --- Slide 1: Título ---
+\maketitle
+
+% --- Slide 2: El Problema de la Observación ---
+\begin{frame}{El Desafío: ¿Qué estamos midiendo?}
+    \begin{columns}
+        \begin{column}{0.55\textwidth}
+            \begin{itemize}
+                \item El cerebro es un sistema dinámico gobernado por un flujo $\phi^t$ sobre una variedad compacta $\mathcal{M}$ de \alert{alta dimensión} $d$.
+                \item El EEG es solo una \textbf{función de observación} escalar unidimensional $y: \mathcal{M} \to \mathbb{R}$, dando la serie $x(t) = y(\phi^t(s_0))$.
+                \item \textbf{Reto:} ¿Cómo recuperar la dinámica invariante topológica de la red neuronal desde una sola observación temporal?
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \centering
+            \begin{tikzpicture}[scale=0.8]
+                \draw[thick, teal] (0, 1) sin (1, 2) cos (2, 1) sin (3, 0) cos (4, 1);
+                \node[above] at (2, 2) {Observación 1D $x(t)$};
+                \draw[->, thick, gray] (2, 0) -- (2, -1) node[midway, right] {Takens};
+                \draw[thick, orange] (1,-2) circle (0.8 and 0.3);
+                \draw[thick, orange] (2,-2.5) circle (1 and 0.4);
+                \node[below] at (2, -3) {Atractor Multidimensional};
+            \end{tikzpicture}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% --- Slide 3: Espacio de Estados (El Péndulo) ---
+\begin{frame}{Concepto 1: El Estado y el Espacio de Fase}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item \textbf{Estado:} El vector $\mathbf{x}(t) \in \mathbb{R}^n$ que define unívocamente las condiciones iniciales del sistema.
+                \item \textbf{Espacio de Fase:} La variedad diferenciable donde coexisten todas las trayectorias $\mathbf{x}(t)$ admisibles.
+            \end{itemize}
+            \vspace{0.5cm}
+            \textit{La evolución geométrica es dictada por el sistema dinámico continuo:}
+            \begin{equation*}
+                \frac{d\mathbf{x}}{dt} = F(\mathbf{x}(t), \mu)
+            \end{equation*}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \centering
+            \begin{tikzpicture}[scale=0.6]
+                \draw[->, gray] (-3.5,0) -- (3.5,0) node[right] {Posición ($\theta$)};
+                \draw[->, gray] (0,-3.5) -- (0,3.5) node[above] {Velocidad ($\omega$)};
+                \draw[thick, teal, domain=0:4*pi, samples=150, variable=\t] plot ({\t*cos(\t r)*exp(-\t/4)}, {\t*sin(\t r)*exp(-\t/4)});
+                \filldraw[orange] (0,0) circle (3pt) node[below right] {Atractor Fijo};
+            \end{tikzpicture}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% --- Slide 4: Variedades Diferenciables ---
+\begin{frame}{Concepto 2: Variedades Diferenciables ($\mathcal{M}$)}
+    \textbf{¿Por qué modelamos el cerebro como una variedad?}
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item Es un espacio topológico Hausdorff, \alert{localmente homeomorfo} a $\mathbb{R}^d$.
+        \item Está equipado con una estructura de atlas suave ($C^\infty$), permitiendo el cálculo diferencial mediante las cartas locales:
+    \end{itemize}
+    \begin{block}{Cartas y Transiciones}
+        \begin{equation*}
+            \psi_\alpha: U_\alpha \subset \mathcal{M} \to \mathbb{R}^d
+        \end{equation*}
+        \centering \small Los mapas de transición $\psi_\beta \circ \psi_\alpha^{-1}$ son difeomorfismos suaves que preservan la estructura del espacio.
+    \end{block}
+\end{frame}
+
+% --- Slide 5: Homeomorfismos ---
+\begin{frame}{Concepto 3: Difeomorfismos e Invariantes}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Equivalencia Topológica ($\cong$)} \\
+            Dos espacios son homeomorfos si existe una biyección continua con inversa continua.
+            \vspace{0.3cm}
+            \\ Un \alert{difeomorfismo} $h: \mathcal{M} \to \mathcal{N}$ requiere además que $h$ y $h^{-1}$ sean suaves.
+            \vspace{0.2cm}
+            \\ Esto asegura la preservación de los \textbf{invariantes dinámicos} subyacentes, como los exponentes característicos de Lyapunov $\lambda_i$ y la dimensión fractal de correlación $D_2$.
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \centering
+            \fbox{\includegraphics[width=0.9\textwidth]{homeomorphism.png}} 
+            \\ \small Variedad $A \cong$ Variedad $B$
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% --- Slide 6: El Teorema de Takens ---
+\begin{frame}{La Solución: Teorema de Inmersión de Takens (1981)}
+    Sea $\mathcal{M}$ una variedad compacta de dimensión $d$. Para un par genérico $(\phi, y)$, donde $\phi: \mathcal{M} \to \mathcal{M}$ es un difeomorfismo suave y $y: \mathcal{M} \to \mathbb{R}$ es una función de observación, el mapa de inmersión por retrasos $\Phi_{\tau, m}: \mathcal{M} \to \mathbb{R}^m$ dado por:
+    
+    \begin{block}{Mapeo de Reconstrucción}
+        \begin{equation*}
+            \Phi_{\tau, m}(x) = \begin{bmatrix} y(x) \\ y(\phi^\tau(x)) \\ y(\phi^{2\tau}(x)) \\ \vdots \\ y(\phi^{(m-1)\tau}(x)) \end{bmatrix} \equiv \mathbf{X}(t)
+        \end{equation*}
+    \end{block}
+
+    \begin{description}
+        \item[$m \ge 2d + 1$] Condición de incrustación de Whitney para garantizar inyectividad diferencial (ausencia de auto-intersecciones espurias).
+        \item[$\tau$] Retraso temporal (Tau).
+    \end{description}
+\end{frame}
+
+% --- Slide 7: Selección del Retraso Óptimo ---
+\begin{frame}{¿Cómo elegir $\tau$? (Independencia Estadística)}
+    Maximizamos la ortogonalidad topológica usando la \textbf{Información Mutua (MI)} para dependencias no lineales, o el Teorema de Wiener-Khinchin para las lineales:
+    \begin{equation*}
+        I(\tau) = \sum_{x(t),x(t+\tau)} P(x(t), x(t+\tau)) \log_2 \left( \frac{P(x(t), x(t+\tau))}{P(x(t))P(x(t+\tau))} \right)
+    \end{equation*}
+    
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        \begin{axis}[
+            axis lines=middle,
+            xlabel={$\tau$ (Retraso)},
+            ylabel={$I(\tau)$},
+            ymin=-0.5, ymax=1.2,
+            xmin=0, xmax=5,
+            ticks=none,
+            width=10cm,
+            height=4.5cm
+        ]
+        \addplot[domain=0:5, samples=100, thick, teal] {exp(-0.5*x)*cos(deg(2*x))};
+        \filldraw[orange] (axis cs:0.785, 0) circle (2.5pt) node[above right] {Primer mínimo local};
+        \end{axis}
+    \end{tikzpicture}
+    
+    \small Buscamos el primer mínimo de $I(\tau)$ para asegurar que $\mathbf{X}(t)$ expanda eficientemente el espacio de fase.
+\end{frame}
+
+% --- Slide 8: Eficiencia Computacional ---
+\begin{frame}[fragile]{Ingeniería: Eficiencia con \textit{Stride Tricks}}
+    Evitamos copiar gigabytes de datos en RAM (Complejidad $\mathcal{O}(1)$ en espacio). Transformamos el tensor mapeando la \textbf{Matriz de Hankel} controlando la aritmética de punteros a nivel del CPU.
+    
+    \vspace{0.3cm}
+    \begin{lstlisting}
+import numpy as np
+
+def embed_signal(x, m, tau):
+    """Inmersión topológica O(1) usando álgebra tensorial en NumPy"""
+    shape = (x.shape[0] - (m - 1) * tau, m)
+    strides = (x.strides[0], x.strides[0] * tau)
+    
+    # Vista en memoria isomórfica al atractor, sin duplicación
+    return np.lib.stride_tricks.as_strided(x, shape, strides)
+    \end{lstlisting}
+\end{frame}
+
+% --- Slide 9: Visualización de Atractores ---
+\begin{frame}{Fusión de Geometría y Frecuencia}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            Asignamos energía espectral instantánea como un gradiente continuo sobre la variedad 3D reconstruida, utilizando la \textbf{Transformada Continua de Wavelet (CWT)}.
+            \begin{equation*}
+                W_x(a,b) = \frac{1}{\sqrt{|a|}} \int_{-\infty}^{\infty} x(t) \bar{\psi} \left(\frac{t-b}{a}\right) dt
+            \end{equation*}
+            \begin{equation*}
+                E_{loc}(t) = \int_{a_1}^{a_2} |W_x(a,t)|^2 \frac{da}{a^2}
+            \end{equation*}
+            Intersección entre el dominio tiempo-escala y el análisis topológico no lineal.
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \centering
+            \fbox{\includegraphics[width=\textwidth]{wavelet.png}}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% --- Slide 10: El Atractor como BiomarLourdes M. García-Garfias, Rosh Guadiana-Paez, Bárbara del R. Almazán-Benítez, Edwin Montes-Orozco and Osiris Díaz-Torrescador ---
+\begin{frame}{Interpretación Biológica y Clínica}
+    \begin{description}
+        \item[\alert{Vigilia Activa}] Atractor extraño, espectro de Lyapunov positivo $\lambda_1 > 0$ (caos determinista) y alta entropía métrica. La red procesa información de forma altamente paralela.
+        \vspace{0.3cm}
+        \item[\alert{Sueño Profundo / Coma}] Bifurcación topológica hacia múltiples \textit{ciclos límite}. La corteza está sincronizada por el tálamo restringiendo sus grados de libertad.
+        \vspace{0.3cm}
+        \item[\alert{Crisis Epiléptica}] Contracción drástica de la dimensionalidad de inmersión (hipersincronía patológica). Transformación abrupta en el espacio de fase que antecede la crisis.
+    \end{description}
+\end{frame}
+
+% --- Slide 11: Métrica Maestra: Exponente de Hurst ---
+\begin{frame}{Cuantificación: Persistencia de Dinámica Larga}
+    El \textbf{Exponente de Hurst ($H$)} extraído del análisis de Rango Reescalado parametriza las correlaciones asintóticas espaciotemporales de la red:
+    
+    \begin{equation*}
+        \mathbb{E} \left[ \frac{R(n)}{S(n)} \right] \sim C n^H \quad \text{cuando} \quad n \to \infty
+    \end{equation*}
+    
+    \vspace{0.4cm}
+    \begin{itemize}
+        \item \makebox[2cm][l]{\textbf{$H > 0.5$}} \alert{Persistente.} Memoria a largo plazo, dinámica cerebral sana y acoplamiento robusto (ruido fraccionario).
+        \vspace{0.2cm}
+        \item \makebox[2cm][l]{\textbf{$H \approx 0.5$}} \alert{Ruido Blanco.} Ausencia de correlaciones de largo alcance (movimiento Browniano puro).
+        \vspace{0.2cm}
+        \item \makebox[2cm][l]{\textbf{$H < 0.5$}} \alert{Anti-persistente.} Ruido violeta; alta volatilidad neural y reversión rápida a la media estructural.
+    \end{itemize}
+\end{frame}
+
+% --- Slide 12: Conclusión y Demo ---
+\begin{frame}[standout]
+    \Huge \textbf{Demo} \\
+    \vspace{0.5cm}
+\end{frame}
+% --- Slide 13: Referencias ---
+\begin{frame}[allowframebreaks]{Referencias Bibliográficas}
+    \tiny % Letra pequeña para ajustarse al formato de bibliografía
+    
+    \textbf{Teoría Fundamental}
+    \begin{itemize}
+        \item Takens, F. (1981). \textit{Detecting strange attractors in turbulence}. Lecture Notes in Mathematics, 898, 366-381. Springer, Berlin.
+        \item Sauer, T., Yorke, J. A., \& Casdagli, M. (1991). \textit{Embedology}. Journal of Statistical Physics, 65(3-4), 579-616.
+        \item Fraser, A. M., \& Swinney, H. L. (1986). \textit{Independent coordinates for strange attractors from mutual information}. Physical Review A, 33(2), 1134-1140.
+        \item Cao, L. (1997). \textit{Practical method for determining the minimum embedding dimension of a scalar time series}. Physica D: Nonlinear Phenomena, 110(1-2), 43-50.
+    \end{itemize}
+
+    \vspace{0.3cm}
+    \textbf{Dinámica No Lineal en EEG}
+    \begin{itemize}
+        \item Babloyantz, A., Salazar, J. M., \& Nicolis, C. (1985). \textit{Evidence of chaotic dynamics of brain activity during the sleep cycle}. Physics Letters A, 111(3), 152-156.
+        \item Le Van Quyen, M., et al. (2001). \textit{Anticipation of epileptic seizures from standard EEG recordings}. The Lancet, 357(9251), 183-188.
+        \item Stam, C. J., et al. (1999). \textit{Investigation of EEG non-linearity in dementia and Parkinson's disease}. Electroencephalography and Clinical Neurophysiology, 95(5), 309-317.
+        \item Linkenkaer-Hansen, K., et al. (2001). \textit{Long-range temporal correlations and scaling behavior in human brain oscillations}. Journal of Neuroscience, 21(4), 1370-1377.
+    \end{itemize}
+
+    \framebreak % Fuerza un salto de diapositiva si es necesario
+    
+    \textbf{Métodos de Procesamiento de Señales}
+    \begin{itemize}
+        \item Welch, P. D. (1967). \textit{The use of fast Fourier transform for the estimation of power spectra}. IEEE Transactions on Audio and Electroacoustics, 15(2), 70-73.
+        \item Grossmann, A., \& Morlet, J. (1984). \textit{Decomposition of Hardy functions into square integrable wavelets of constant shape}. SIAM Journal on Mathematical Analysis, 15(4), 723-736.
+        \item Hurst, H. E. (1951). \textit{Long-term storage capacity of reservoirs}. Transactions of the American Society of Civil Engineers, 116, 770-799.
+    \end{itemize}
+
+    \vspace{0.3cm}
+    \textbf{Bibliotecas y Software Médico}
+    \begin{itemize}
+        \item Gramfort, A. et al. (2013). \textit{MEG and EEG data analysis with MNE-Python}. Frontiers in Neuroscience, 7, 267.
+        \item Niedermeyer, E., \& Lopes da Silva, F. H. (2011). \textit{Electroencephalography: Basic Principles, Clinical Applications, and Related Fields}. 6th ed. Lippincott Williams \& Wilkins.
+    \end{itemize}
+\end{frame}
+
+\end{document}

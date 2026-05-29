@@ -1,0 +1,119 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, braket, physics}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Configuración de estilo de código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% Configuración de secciones
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\title{\textbf{Syllabus: Conceptos Básicos de Información Cuántica}}
+\author{Basado en: \textit{Basics of Quantum Information} (IBM Quantum) \\ Nivel: Preparatoria Avanzada}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\noindent\textbf{Duración Total:} 2 Horas (1 hr Teoría + 1 hr Laboratorio Práctico) \\
+\textbf{Requisitos:} Conocimientos previos en álgebra elemental y nociones de programación en Python.
+
+\section*{Resumen y Enfoque del Curso}
+Este curso intensivo adapta los fundamentos del programa de IBM Quantum para estudiantes de preparatoria. La primera mitad proporciona un marco teórico y físico, partiendo de la dualidad onda-partícula y la ecuación de Schrödinger, para luego formalizar matemáticamente los conceptos de probabilidad, números complejos y matrices aplicados a sistemas de dos niveles (Qubits). 
+
+La segunda mitad es un laboratorio práctico en Python. Los estudiantes traducirán los conceptos matriciales a código utilizando arreglos (NumPy) y posteriormente construirán, simularán y medirán sus primeros circuitos cuánticos utilizando el framework Qiskit de IBM. Se mantendrá en todo momento un enfoque que favorezca el razonamiento matemático detallado y de alto nivel.
+
+\vspace{0.5cm}
+
+\hrule
+\vspace{0.5cm}
+
+\section*{Temario: Parte I - Fundamentos Físicos y Matemáticos (Hora 1)}
+
+\subsection*{1.1 De la Física Clásica a la Cuántica (15 min)}
+\begin{itemize}
+    \item \textbf{Dualidad Onda-Partícula:} El experimento de la doble rendija y el colapso de la función de onda inducido por la observación.
+    \item \textbf{La Ecuación de Schrödinger:} Evolución temporal determinista de los estados cuánticos expresada como $i\hbar \frac{\partial}{\partial t}\ket{\Psi(t)} = \hat{H}\ket{\Psi(t)}$.
+    \item \textbf{Probabilidad Cuántica:} Contraste entre la adición de probabilidades clásicas ($P = p_1 + p_2$) y la interferencia de amplitudes de probabilidad cuánticas ($P = |\psi_1 + \psi_2|^2$).
+\end{itemize}
+
+\subsection*{1.2 Herramientas Matemáticas: Complejos y Matrices (20 min)}
+\begin{itemize}
+    \item \textbf{Números Complejos:} Representación rectangular ($z = x + iy$) y polar ($z = r e^{i\theta}$). La magnitud al cuadrado como métrica de probabilidad: $|z|^2 = z^* z$.
+    \item \textbf{Álgebra Lineal para Cuántica:} Vectores columna (Kets) y vectores fila conjugados (Bras). 
+    \item \textbf{Matrices Unitarias:} Operadores que preservan la probabilidad, cumpliendo $U^\dagger U = I$.
+\end{itemize}
+
+\subsection*{1.3 El Qubit y la Información Cuántica (25 min)}
+\begin{itemize}
+    \item \textbf{Definición del Qubit:} Combinación lineal de estados base $\ket{\psi} = \alpha\ket{0} + \beta\ket{1}$, donde $\alpha, \beta \in \mathbb{C}$ y $|\alpha|^2 + |\beta|^2 = 1$.
+    \item \textbf{Compuertas de un Qubit:} Representación matricial de las compuertas $X$ (NOT cuántico) y Hadamard ($H$).
+    \item \textbf{Sistemas Multiqubit y Entrelazamiento:} Introducción rápida al producto tensorial y los estados de Bell.
+\end{itemize}
+
+\newpage
+
+\section*{Temario: Parte II - Laboratorio Práctico en Python (Hora 2)}
+
+\subsection*{2.1 Álgebra Lineal Computacional con NumPy (20 min)}
+\begin{itemize}
+    \item \textbf{Vectores y Matrices en Python:} Definición manual de los estados $\ket{0}$ y $\ket{1}$ como arreglos de NumPy.
+    \item \textbf{Operaciones Matriciales:} Aplicación del producto punto matricial (\texttt{np.dot} o \texttt{@}) para simular la acción de la compuerta $X$ y $H$ sobre el estado inicial.
+\end{itemize}
+\begin{lstlisting}[language=Python, caption={Ejemplo ilustrativo para el manual}]
+import numpy as np
+ket_0 = np.array([1, 0])
+H = (1/np.sqrt(2)) * np.array([[1, 1], [1, -1]])
+estado_superposicion = H @ ket_0
+\end{lstlisting}
+
+\subsection*{2.2 Introducción a IBM Qiskit (20 min)}
+\begin{itemize}
+    \item \textbf{El Objeto QuantumCircuit:} Inicialización de registros cuánticos y clásicos (\texttt{QuantumCircuit(q, c)}).
+    \item \textbf{Traducción de Compuertas:} Mapeo de la teoría matemática a funciones de la librería (\texttt{qc.h(0)}, \texttt{qc.cx(0,1)}).
+    \item \textbf{Construcción de un Estado Entrelazado:} Creación paso a paso del circuito para el estado de Bell $\ket{\Phi^+} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11})$.
+\end{itemize}
+
+\subsection*{2.3 Simulación, Medición y Visualización (20 min)}
+\begin{itemize}
+    \item \textbf{Medición (Regla de Born en código):} Colapso del estado cuántico y almacenamiento de la información en bits clásicos usando \texttt{qc.measure()}.
+    \item \textbf{Ejecución en Simulador:} Uso del \texttt{AerSimulator} para ejecutar el circuito miles de veces (shots).
+    \item \textbf{Análisis de Resultados:} Graficación de las distribuciones de probabilidad resultantes usando \texttt{plot\_histogram}. Demostración práctica de la aleatoriedad cuántica estructurada.
+\end{itemize}
+
+\end{document}

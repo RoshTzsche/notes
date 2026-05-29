@@ -1,0 +1,1044 @@
+% ============================================================
+%  SYLLABUS — De los Sistemas Formales a la Electrónica Aplicada
+%  Teaching Assistant: Rosh Guadiana  |  Version 2.0
+%  Compilar con: pdflatex (dos pasadas)
+% ============================================================
+
+\documentclass[11pt, letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.8cm, left=3.0cm, right=3.0cm, headheight=22pt}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{booktabs, longtable, array, multirow}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[colorlinks=true, linkcolor=mitred, urlcolor=accentblue, citecolor=darkgray]{hyperref}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{setspace}
+%\usepackage{microtype}
+
+% --- Colors ---
+\definecolor{mitred}{RGB}{163, 31, 52}
+\definecolor{darkgray}{RGB}{60, 60, 60}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+\definecolor{accentblue}{RGB}{0, 73, 144}
+\definecolor{outdoorgreen}{RGB}{34, 85, 34}
+\definecolor{diagonalred}{RGB}{140, 20, 40}
+
+% --- Header / Footer ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{darkgray}{\textsc{Sistemas Formales y Electr\'onica Aplicada}}}
+\fancyhead[R]{\small\textcolor{darkgray}{TA: Rosh Guadiana}}
+\fancyfoot[C]{\small\textcolor{darkgray}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{mitred}\leaders\hrule height \headrulewidth\hfill}}
+
+% --- Section styles ---
+\titleformat{\section}
+  {\large\bfseries\color{mitred}}
+  {\thesection.}{0.6em}{}
+  [\vspace{-0.3em}\textcolor{mitred}{\rule{\linewidth}{0.6pt}}]
+\titleformat{\subsection}
+  {\normalsize\bfseries\color{accentblue}}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}
+  {\normalsize\itshape\color{darkgray}}{}{0em}{}
+
+% --- Boxes ---
+\newtcolorbox{objetivos}{
+  colback=lightgray, colframe=mitred,
+  fonttitle=\bfseries\small, title=Objetivos de Aprendizaje,
+  left=4pt, right=4pt, top=4pt, bottom=4pt, boxrule=0.6pt, breakable}
+
+\newtcolorbox{lecturas}{
+  colback=white, colframe=accentblue,
+  fonttitle=\bfseries\small, title=Lecturas Obligatorias,
+  left=4pt, right=4pt, top=4pt, bottom=4pt, boxrule=0.6pt, breakable}
+
+\newtcolorbox{prereqs}{
+  colback=white, colframe=darkgray,
+  fonttitle=\bfseries\small, title=Prerrequisitos Formales,
+  left=4pt, right=4pt, top=4pt, bottom=4pt, boxrule=0.5pt}
+
+\newtcolorbox{nota}{
+  colback=white, colframe=mitred!40,
+  fonttitle=\bfseries\small, title=Nota Metodol\'ogica,
+  left=4pt, right=4pt, top=4pt, bottom=4pt, boxrule=0.5pt}
+
+% Diagonal thread box — aparece en Sesiones 1, 2 y 5
+\newtcolorbox{diagonal}[1]{
+  colback=diagonalred!6, colframe=diagonalred,
+  fonttitle=\bfseries\small\color{white},
+  coltitle=white, colbacktitle=diagonalred,
+  title=Hilo Rojo \ --- \ El Argumento Diagonal \ (\textit{#1}),
+  left=5pt, right=5pt, top=4pt, bottom=4pt, boxrule=0.7pt, breakable}
+
+% Outdoor session box
+\newtcolorbox{peripatetic}{
+  colback=outdoorgreen!5, colframe=outdoorgreen,
+  fonttitle=\bfseries\small\color{white},
+  coltitle=white, colbacktitle=outdoorgreen,
+  title=Sesi\'on Peri\'apat\'etica --- Al Aire Libre,
+  left=5pt, right=5pt, top=4pt, bottom=4pt, boxrule=0.7pt, breakable}
+
+\setlist[itemize]{leftmargin=1.4em, itemsep=2pt, topsep=3pt}
+\setlist[enumerate]{leftmargin=1.4em, itemsep=2pt, topsep=3pt}
+\setlength{\parskip}{5pt}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\begin{center}
+
+\vspace*{0.8cm}
+{\footnotesize\textsc{\textcolor{darkgray}{Ingenier\'ia y Ciencias F\'isicas --- Curso Propedéutico}}}
+\vspace{0.4cm}
+
+\textcolor{mitred}{\rule{\linewidth}{1.2pt}}
+\vspace{0.4cm}
+
+{\LARGE\bfseries De los Sistemas Formales\\[0.3em] a la Electr\'onica Aplicada}
+
+\vspace{0.3cm}
+\textcolor{mitred}{\rule{\linewidth}{1.2pt}}
+\vspace{0.6cm}
+
+{\large\itshape Del Lenguaje como Sistema Axiom\'atico\\
+a la F\'isica del Transistor}
+
+\vspace{1.4cm}
+
+\begin{tabular}{ll}
+\textbf{Modalidad:}           & Presencial intensiva \\[3pt]
+\textbf{Duraci\'on:}          & 11 sesiones $\times$ 2 horas (22 horas totales) \\[3pt]
+\textbf{Nivel:}               & Universitario (1.$^\circ$--2.$^\circ$ a\~no, Ingenier\'ia / F\'isica) \\[3pt]
+\textbf{Teaching Assistant:}  & Rosh Guadiana \\[3pt]
+\textbf{Idioma:}              & Espa\~nol (terminolog\'ia t\'ecnica en ingl\'es cuando aplique) \\[3pt]
+\textbf{Prerequisitos:}       & C\'alculo diferencial I, \'Algebra lineal b\'asica \\[3pt]
+\textbf{Evaluaci\'on:}        & No hay calificaciones. Hay comprensi\'on o no la hay. \\
+\end{tabular}
+
+\vspace{1.6cm}
+
+% --- MANIFIESTO ---
+\begin{tcolorbox}[
+  colback=mitred!4, colframe=mitred,
+  boxrule=0.8pt, left=10pt, right=10pt, top=8pt, bottom=8pt]
+{\small\itshape
+Sabemos que nos mienten. Lo que nadie nos ha ense\~nado es la diferencia entre
+una opini\'on y una demostraci\'on. Este curso existe para corregir eso
+--- y para mostrar que incluso la demostraci\'on tiene l\'imites
+que se pueden probar con rigor.
+
+\medskip
+No hay respuestas que memorizar. Hay una sola exigencia:
+si lo afirmas, dem\'uestralo.}
+\end{tcolorbox}
+
+\vspace{1.2cm}
+
+\begin{tcolorbox}[
+  colback=white, colframe=diagonalred,
+  boxrule=0.6pt, left=8pt, right=8pt, top=6pt, bottom=6pt]
+{\footnotesize\textbf{Hilo rojo del curso:} El argumento diagonal de Cantor aparece
+tres veces --- en la Sesi\'on~1, en la Sesi\'on~2 y en la Sesi\'on~5.
+Cada vez con una cara diferente. Al final ser\'a la misma idea.}
+\end{tcolorbox}
+
+\vfill
+{\small\textcolor{darkgray}{Versi\'on 2.0 --- \today}}
+\end{center}
+\end{titlepage}
+
+% ============================================================
+%  TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  SOBRE EL MÉTODO
+% ============================================================
+\section*{Sobre el M\'etodo}
+\addcontentsline{toc}{section}{Sobre el M\'etodo}
+
+\subsection*{C\'omo funciona este curso}
+
+Este curso tiene tres pilares pedag\'ogicos. Los tres son necesarios. Ninguno es opcional.
+
+\textbf{1. La frustraci\'on productiva.}
+Vas a encontrar ideas que no vas a entender la primera vez. Eso no es un error del dise\~no --- es el dise\~no. El objetivo es que te vayas a casa con algo que no te deja dormir, que lo pienses, que al d\'ia siguiente vuelvas y de repente lo veas con claridad. Ese momento de claridad despu\'es de la frustraci\'on es el aprendizaje real. Resistir la tentaci\'on de pedir la respuesta inmediata es parte del trabajo.
+
+\textbf{2. Todo se demuestra.}
+Nada en este curso se afirma sin demostraci\'on o sin la honestidad expl\'icita de que la demostraci\'on est\'a fuera de nuestro alcance en este momento y por qu\'e. Si algo se presenta como verdadero, se puede verificar. Si no se puede verificar en el tiempo disponible, se dice con precisi\'on d\'onde encontrar la demostraci\'on completa.
+
+\textbf{3. La contradicci\'on es bienvenida.}
+Si en cualquier momento --- en el sal\'on, en el jard\'in, en los pasillos --- crees que algo est\'a mal demostrado, que hay un hueco en el argumento, que la afirmaci\'on no se sostiene: dilo. Con argumento. Eso no es falta de respeto. Es exactamente lo que este curso intenta producir.
+
+\subsection*{Sobre los ejercicios}
+
+Hay ejercicios a lo largo del curso. No se califican. Existen por una sola raz\'on: para que descubras por ti mismo d\'onde est\'an los huecos en tu compresi\'on. Un ejercicio que no puedes resolver no es un fracaso --- es un diagn\'ostico. Trae las preguntas que te genere a la siguiente sesi\'on.
+
+\subsection*{Sobre la sesi\'on peri'apat'etica}
+
+La Sesi\'on~6 no tiene sal\'on, no tiene pizarr\'on, no tiene diapositivas. Es una conversaci\'on al aire libre bajo los \'arboles. El TA presenta una idea perturbadora y se sienta. Los estudiantes hablan, discuten, contradicen. No hay conclusi\'on obligatoria. El objetivo no es llegar a un acuerdo --- es experimentar lo que se siente cuando una idea te desestabiliza y tienes que construir tu propio camino de vuelta.
+
+\newpage
+
+% ============================================================
+%  MAPA CONCEPTUAL
+% ============================================================
+\section{Arco Narrativo del Curso}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{clcc}
+\toprule
+\textbf{Ses.} & \textbf{T\'itulo} & \textbf{Abstracci\'on} & \textbf{Hilo Diagonal} \\
+\midrule
+1  & Fundamentos: Conjuntos y Estructuras        & $\uparrow$ M\'axima & \textcolor{diagonalred}{\textbf{I}} \\
+2  & Lenguajes Formales y Jerarqu\'ia de Chomsky & & \textcolor{diagonalred}{\textbf{II}} \\
+3  & L\'ogica Proposicional: Sintaxis y Sem\'antica & & \\
+4  & L\'ogica de Primer Orden y Teor\'ia de Modelos & & \\
+5  & Metamatem\'atica, G\"odel y Computabilidad & & \textcolor{diagonalred}{\textbf{III} (explosi\'on)} \\
+\midrule
+\multicolumn{4}{c}{\textcolor{outdoorgreen}{\textbf{--- Sesi\'on 6: Di\'alogo Perip\'atet\'ico al Aire Libre ---}}} \\
+\midrule
+7  & \textit{El Puente}: \'Algebra de Boole y Silicio & $\downarrow$ Creciente & \\
+8  & Semiconductores: Estad\'istica de Fermi-Dirac & & \\
+9  & La Uni\'on PN y el Diodo                   & & \\
+10 & El MOSFET y las Compuertas CMOS            & & \\
+11 & Sistemas Din\'amicos y Filtros en el dominio $s$ & $\downarrow$ M\'inima & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.4em}
+\begin{nota}
+El argumento diagonal de Cantor es el hilo estructural del curso.
+Aparece en la Sesi\'on~1 como resultado sobre cardinalidad,
+en la Sesi\'on~2 como l\'imite de los lenguajes formales,
+y en la Sesi\'on~5 como el coraz\'on de los teoremas de G\"odel y Turing.
+No es coincidencia: es la misma idea. El curso est\'a dise\~nado para que
+el alumno lo descubra por s\'i mismo antes de que se lo digan.
+\end{nota}
+
+\newpage
+
+% ============================================================
+%  SESIÓN 1
+% ============================================================
+\section{Sesi\'on 1 --- Fundamentos: Conjuntos, Relaciones y Estructuras}
+
+\begin{prereqs}
+Ninguno. Este es el punto cero formal del curso.
+\end{prereqs}
+
+\subsection*{Motivaci\'on}
+Vivimos rodeados de sistemas que clasifican, ordenan y relacionan objetos: algoritmos de recomendaci\'on, bases de datos, protocolos de red. Todos descansan sobre una \'unica noci\'on primitiva: la de \emph{colecci\'on}. Sin este vocabulario es imposible definir rigurosamente un alfabeto, una funci\'on l\'ogica, ni una distribuci\'on de probabilidad sobre energ\'ias. Esta sesi\'on construye ese vocabulario desde cero --- sin suponer nada.
+
+\subsection{Contenidos}
+
+\subsubsection{1.1 --- Teor\'ia Ingenua de Conjuntos y la Paradoja de Russell}
+\begin{itemize}
+  \item Conjuntos como colecciones no ordenadas: notaci\'on por extensi\'on y comprensi\'on.
+  \item Operaciones: uni\'on $A\cup B$, intersecci\'on $A\cap B$, complemento $\bar{A}$, diferencia $A\setminus B$.
+  \item El conjunto potencia $\mathcal{P}(A)$ y su cardinalidad $2^{|A|}$.
+  \item \textbf{Paradoja de Russell:} el conjunto $R=\{x \mid x\notin x\}$ y por qu\'e la teor\'ia ingenua colapsa.
+  \item Motivaci\'on hacia los axiomas ZFC como soluci\'on --- sin desarrollo formal.
+\end{itemize}
+
+\subsubsection{1.2 --- Relaciones y Funciones}
+\begin{itemize}
+  \item Producto cartesiano $A\times B$. Relaci\'on binaria como subconjunto.
+  \item Propiedades: reflexividad, simetr\'ia, transitividad. Relaciones de equivalencia y orden.
+  \item Funci\'on: inyectividad, sobreyectividad, biyectividad. Composici\'on $g\circ f$.
+\end{itemize}
+
+\subsubsection{1.3 --- Cardinalidad e Infinito}
+\begin{itemize}
+  \item Conjuntos finitos vs.\ infinitos. Biyecci\'on como criterio de equipotencia.
+  \item $|\mathbb{N}|=|\mathbb{Z}|=|\mathbb{Q}|$ (contables) vs.\ $|\mathbb{R}|$ (incontable).
+\end{itemize}
+
+\begin{diagonal}{Primera aparici\'on}
+\textbf{El argumento diagonal de Cantor.} Supongamos que podemos listar todos los n\'umeros reales entre 0 y 1: $r_1, r_2, r_3, \ldots$ Construimos un n\'umero $d$ cuya $n$-\'esima cifra decimal difiere de la $n$-\'esima cifra de $r_n$. Entonces $d$ no puede estar en la lista --- contradicci\'on.
+
+\medskip
+Conclusi\'on: $|\mathbb{R}|>|\mathbb{N}|$. Hay infinitos m\'as grandes que otros.
+
+\medskip
+\textit{Guarda esta estructura: un objeto construido para diferir de cada elemento de una lista. La vas a ver dos veces m\'as.}
+\end{diagonal}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Escribir definiciones matem\'aticas usando notaci\'on de conjuntos est\'andar.
+  \item Demostrar que $|\mathcal{P}(A)|>|A|$ para cualquier conjunto $A$.
+  \item Explicar por qu\'e la paradoja de Russell exige un sistema axiom\'atico formal.
+  \item Reconocer la estructura del argumento diagonal y formular en palabras por qu\'e funciona.
+\end{itemize}
+\end{objetivos}
+
+\begin{lecturas}
+\begin{itemize}
+  \item[$(\star)$] \textbf{Halmos, P. R.} --- \emph{Naive Set Theory}. Cap\'itulos 1--8 (pp.\ 1--44).
+  \item[$(\star)$] \textbf{Hofstadter, D. R.} --- \emph{G\"odel, Escher, Bach}. Cap\'itulo I ``MU-puzzle'' (pp.\ 3--27). \textit{Lectura motivacional obligatoria. No importa si no entiendes todo --- ese es el punto.}
+  \item \textbf{Deaño, A.} --- \emph{Introducci\'on a la l\'ogica formal}. Cap\'itulo 1: Nociones previas (pp.\ 1--18).
+  \item \textbf{Enderton, H. B.} --- \emph{Elements of Set Theory}. Cap\'itulo 1 (pp.\ 1--19).
+\end{itemize}
+\end{lecturas}
+
+\newpage
+
+% ============================================================
+%  SESIÓN 2
+% ============================================================
+\section{Sesi\'on 2 --- Lenguajes Formales y la Jerarqu\'ia de Chomsky}
+
+\begin{prereqs}
+Sesi\'on 1. Dominio de la notaci\'on de conjuntos y el concepto de funci\'on.
+\end{prereqs}
+
+\subsection*{Motivaci\'on}
+Un lenguaje de programaci\'on, un protocolo de red y la sintaxis del espa\~nol comparten una misma estructura: son cadenas generadas por reglas. Esta sesi\'on formaliza esa intuici\'on. El resultado --- la Jerarqu\'ia de Chomsky --- predice exactamente qu\'e clase de m\'aquina puede reconocer cada tipo de lenguaje. Y en el l\'imite de esa jerarqu\'ia reaparece, disfrazada, la misma estructura que vimos la sesi\'on pasada.
+
+\subsection{Contenidos}
+
+\subsubsection{2.1 --- Alfabetos, Cadenas y el Monoide Libre}
+\begin{itemize}
+  \item Alfabeto $\Sigma$: conjunto finito no vac\'io de s\'imbolos.
+  \item Cadena: secuencia finita. Cadena vac\'ia $\varepsilon$. Cerradura de Kleene $\Sigma^*$.
+  \item Lenguaje $L\subseteq\Sigma^*$. Operaciones entre lenguajes.
+\end{itemize}
+
+\subsubsection{2.2 --- Gram\'aticas Formales}
+\begin{itemize}
+  \item Definici\'on: $G=(V,\Sigma,R,S)$.
+  \item Derivaci\'on $\Rightarrow^*$. Lenguaje generado $L(G)$.
+\end{itemize}
+
+\subsubsection{2.3 --- La Jerarqu\'ia de Chomsky}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{clll}
+\toprule
+\textbf{Tipo} & \textbf{Gram\'atica} & \textbf{Aut\'omata} & \textbf{Restricci\'on}\\
+\midrule
+3 & Regular           & Aut\'omata finito  & $A\to aB$ \'o $A\to a$ \\
+2 & Libre de contexto & Aut\'omata de pila & $A\to\gamma$ \\
+1 & Sensible al contexto & Aut\'omata acotado & $|\alpha|\leq|\beta|$ \\
+0 & Sin restricci\'on & M\'aquina de Turing & Ninguna \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{2.4 --- Sintaxis vs.\ Sem\'antica}
+\begin{itemize}
+  \item Ejemplo de Chomsky: \textit{``Colorless green ideas sleep furiously.''}
+  \item El mismo fen\'omeno en matem\'aticas: un esquema sint\'actico vac\'io hasta que interpretamos los predicados.
+\end{itemize}
+
+\begin{diagonal}{Segunda aparici\'on}
+\textbf{El lenguaje diagonal.} Consideremos el conjunto de todas las m\'aquinas de Turing $M_1, M_2, M_3, \ldots$ (son contables: se pueden codificar como cadenas). Definimos el lenguaje:
+\[L_d = \{w_i \mid M_i \text{ \emph{no} acepta } w_i\}\]
+donde $w_i$ es la $i$-\'esima cadena sobre $\Sigma^*$.
+
+Este lenguaje \emph{no puede ser reconocido por ninguna m\'aquina de Turing.} La demostraci\'on es exactamente el argumento diagonal: si existiera $M_k$ que lo reconoce, preguntamos si $M_k$ acepta $w_k$ --- y llegamos a contradicci\'on.
+
+\medskip
+\textit{La misma estructura. Un objeto construido para diferir de cada elemento de la lista. Guarda esto para la Sesi\'on~5.}
+\end{diagonal}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Construir gram\'aticas formales para lenguajes simples y clasificarlas en la jerarqu\'ia.
+  \item Distinguir sint\'axis (reglas de formaci\'on) de sem\'antica (interpretaci\'on).
+  \item Enunciar el lenguaje diagonal y explicar por qu\'e no es reconocible.
+\end{itemize}
+\end{objetivos}
+
+\begin{lecturas}
+\begin{itemize}
+  \item[$(\star)$] \textbf{Sipser, M.} --- \emph{Introduction to the Theory of Computation}, 3.a ed. Cap\'itulo~1 (pp.\ 31--82) y Cap\'itulo~2 \S2.1--2.2 (pp.\ 101--130).
+  \item[$(\star)$] \textbf{Chomsky, N.} --- \emph{Syntactic Structures}. Cap\'itulos 1--3 (pp.\ 11--48). \textit{Fuente primaria.}
+  \item \textbf{Hopcroft, J. E., Motwani, R., \& Ullman, J. D.} --- \emph{Introduction to Automata Theory, Languages, and Computation}, 3.a ed. Cap\'itulo~1 (pp.\ 25--47).
+  \item \textbf{Hofstadter, D. R.} --- \emph{G\"odel, Escher, Bach}. Cap\'itulo~II ``Meaning and Form in Mathematics'' (pp.\ 46--65).
+\end{itemize}
+\end{lecturas}
+
+\newpage
+
+% ============================================================
+%  SESIÓN 3
+% ============================================================
+\section{Sesi\'on 3 --- L\'ogica Proposicional: Sintaxis, Sem\'antica y Prueba}
+
+\begin{prereqs}
+Sesiones 1 y 2. Noci\'on de funci\'on, cadena bien formada, distinci\'on sintaxis/sem\'antica.
+\end{prereqs}
+
+\subsection*{Motivaci\'on}
+En un mundo donde cualquier afirmaci\'on puede contradecirse con otra afirmaci\'on, la l\'ogica proposicional ofrece un sistema donde la validez de un argumento no depende de qui\'en lo diga ni de cu\'antos lo crean --- sino de su estructura formal. Esta sesi\'on construye ese sistema desde la definici\'on de f\'ormula hasta las reglas de prueba. Es la base sobre la que se construir\'an todos los resultados siguientes.
+
+\subsection{Contenidos}
+
+\subsubsection{3.1 --- Sintaxis del C\'alculo Proposicional}
+\begin{itemize}
+  \item Variables proposicionales y conectivos: $\neg, \land, \lor, \to, \leftrightarrow$.
+  \item F\'ormula Bien Formada (FBF): definici\'on inductiva. \'Arbol de an\'alisis sint\'actico.
+  \item Formas Normales: CNF y DNF.
+\end{itemize}
+
+\subsubsection{3.2 --- Sem\'antica: Valuaciones y Tablas de Verdad}
+\begin{itemize}
+  \item Valuaci\'on $v:\text{VAR}\to\{0,1\}$. Extensi\'on inductiva a todas las FBFs.
+  \item Tautolog\'ia, contradicci\'on, contingencia.
+  \item Consecuencia sem\'antica $\Gamma\models\varphi$.
+  \item Completitud funcional: $\{\neg,\land\}$, $\{\neg,\lor\}$, $\{\text{NAND}\}$.
+\end{itemize}
+
+\subsubsection{3.3 --- Sistema de Prueba}
+\begin{itemize}
+  \item Modus Ponens: $\dfrac{\varphi\;\;\varphi\to\psi}{\psi}$. Introducci\'on/eliminaci\'on de conectivos.
+  \item Derivaci\'on formal $\Gamma\vdash\varphi$. Prueba por reducci\'on al absurdo.
+  \item \textbf{Teorema de Correcci\'on:} $\Gamma\vdash\varphi \;\Rightarrow\; \Gamma\models\varphi$.
+  \item Anticipo del Teorema de Completitud (G\"odel 1929): el rec\'iproco tambi\'en vale.
+\end{itemize}
+
+\subsubsection{3.4 --- Mapeo al Espa\~nol Natural}
+\begin{itemize}
+  \item Traducci\'on sistem\'atica de oraciones a FBFs.
+  \item Falacias formales vs.\ errores sem\'anticos.
+\end{itemize}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Construir y verificar FBFs mediante tablas de verdad y derivaci\'on formal.
+  \item Demostrar la completitud funcional de $\{\text{NAND}\}$ --- resultado que regresa en la Sesi\'on~7.
+  \item Distinguir entre un argumento v\'alido y uno verdadero.
+\end{itemize}
+\end{objetivos}
+
+\begin{lecturas}
+\begin{itemize}
+  \item[$(\star)$] \textbf{Deaño, A.} --- \emph{Introducci\'on a la l\'ogica formal}. Partes I y II (pp.\ 19--120).
+  \item[$(\star)$] \textbf{Enderton, H. B.} --- \emph{A Mathematical Introduction to Logic}, 2.a ed. Cap\'itulo~1 (pp.\ 1--60).
+  \item \textbf{Mendelson, E.} --- \emph{Introduction to Mathematical Logic}, 6.a ed. Cap\'itulo~1 (pp.\ 1--44).
+  \item \textbf{Hofstadter, D. R.} --- \emph{G\"odel, Escher, Bach}. Cap\'itulo~VIII (pp.\ 204--231).
+\end{itemize}
+\end{lecturas}
+
+\newpage
+
+% ============================================================
+%  SESIÓN 4
+% ============================================================
+\section{Sesi\'on 4 --- L\'ogica de Primer Orden y Teor\'ia de Modelos}
+
+\begin{prereqs}
+Sesi\'on 3. La l\'ogica proposicional debe estar dominada.
+\end{prereqs}
+
+\subsection*{Motivaci\'on}
+La l\'ogica proposicional no puede expresar ``todo n\'umero natural tiene un sucesor'' ni ``existe un electr\'on con energ\'ia $E>E_g$''. La l\'ogica de primer orden a\~nade cuantificadores y variables de individuo, alcanzando el poder expresivo de la matem\'atica y la f\'isica. Es tambi\'en el lenguaje en que G\"odel escribi\'o su teorema.
+
+\subsection{Contenidos}
+
+\subsubsection{4.1 --- Sintaxis de la L\'ogica de Primer Orden}
+\begin{itemize}
+  \item Firma l\'ogica $\mathcal{L}=(\mathcal{F},\mathcal{P},\text{ar})$: s\'imbolos de funci\'on y predicado.
+  \item T\'erminos, f\'ormulas at\'omicas, FBFs con cuantificadores $\forall$ y $\exists$.
+  \item Variables libres vs.\ ligadas. Oraci\'on: FBF sin variables libres.
+\end{itemize}
+
+\subsubsection{4.2 --- Sem\'antica: Estructuras e Interpretaciones}
+\begin{itemize}
+  \item Estructura $\mathfrak{A}$: dominio, interpretaci\'on de funciones y predicados.
+  \item Satisfacibilidad $\mathfrak{A}\models_s\varphi$. Consecuencia l\'ogica $\Gamma\models\varphi$.
+  \item Leyes de De Morgan cuantificadas: $\neg\forall x\,P(x)\equiv\exists x\,\neg P(x)$.
+\end{itemize}
+
+\subsubsection{4.3 --- Teor\'ia de la Demostraci\'on en FOL}
+\begin{itemize}
+  \item Reglas para $\forall$ y $\exists$ (C\'alculo de Secuentes de Gentzen, versi\'on simplificada).
+  \item Inducci\'on matem\'atica como esquema de eliminaci\'on de $\forall$ sobre $\mathbb{N}$.
+\end{itemize}
+
+\subsubsection{4.4 --- Resultados de Teor\'ia de Modelos (sin demostraci\'on)}
+\begin{itemize}
+  \item \textbf{Completitud (G\"odel 1929):} $\Gamma\models\varphi\;\Leftrightarrow\;\Gamma\vdash\varphi$.
+  \item \textbf{Compacidad:} si todo subconjunto finito de $\Gamma$ tiene modelo, $\Gamma$ tiene modelo.
+  \item \textbf{L\"owenheim-Skolem:} la aritm\'etica no puede caracterizar a $\mathbb{N}$ un\'ivocamente en FOL.
+\end{itemize}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Formalizar enunciados matem\'aticos y f\'isicos en FOL.
+  \item Distinguir con precisi\'on entre $\vdash$ y $\models$.
+  \item Enunciar y comprender las implicaciones de la completitud y la compacidad.
+\end{itemize}
+\end{objetivos}
+
+\begin{lecturas}
+\begin{itemize}
+  \item[$(\star)$] \textbf{Enderton, H. B.} --- \emph{A Mathematical Introduction to Logic}, 2.a ed. Cap\'itulo~2 (pp.\ 68--164).
+  \item[$(\star)$] \textbf{Deaño, A.} --- \emph{Introducci\'on a la l\'ogica formal}. Parte III (pp.\ 121--200).
+  \item \textbf{Marker, D.} --- \emph{Model Theory: An Introduction}. Cap\'itulo~1 (pp.\ 1--30).
+  \item \textbf{Hofstadter, D. R.} --- \emph{G\"odel, Escher, Bach}. Cap\'itulo~XIV (pp.\ 438--460). \textit{Preparaci\'on para la sesi\'on siguiente.}
+\end{itemize}
+\end{lecturas}
+
+\newpage
+
+% ============================================================
+%  SESIÓN 5
+% ============================================================
+\section{Sesi\'on 5 --- Metamatem\'atica, Incompletitud y Computabilidad}
+
+\begin{prereqs}
+Sesiones 1--4. Especialmente: distinci\'on $\vdash$ vs.\ $\models$, argumento diagonal (Sesiones 1 y 2).
+\end{prereqs}
+
+\subsection*{Motivaci\'on}
+Esta sesi\'on responde a la pregunta m\'as perturbadora del curso: \emph{¿puede un sistema formal decidir su propia verdad?} La respuesta negativa de G\"odel (1931) tiene una traducci\'on directa al problema de la parada de Turing (1936). Pero hay algo m\'as: la misma estructura diagonal que Cantor us\'o para contar infinitos es el coraz\'on de ambos resultados. No es coincidencia. Es el mismo argumento.
+
+\subsection{Contenidos}
+
+\subsubsection{5.1 --- La Aritm\'etica de Peano y la Aritmetizaci\'on}
+\begin{itemize}
+  \item Axiomas de Peano en FOL.
+  \item N\'umero de G\"odel de una f\'ormula: $\ulcorner\varphi\urcorner\in\mathbb{N}$. La sintaxis codificada como aritm\'etica.
+\end{itemize}
+
+\subsubsection{5.2 --- El Primer Teorema de Incompletitud}
+\begin{itemize}
+  \item Predicado de demostraci\'on $\text{Dem}(x,y)$.
+  \item Construcci\'on de la oraci\'on de G\"odel $G$: ``$G$ no es demostrable.''
+\end{itemize}
+
+\begin{diagonal}{Tercera aparici\'on --- La explosi\'on}
+El argumento diagonal de Cantor (Sesi\'on~1) construy\'o un n\'umero real que difiere de cada elemento de una lista supuestamente completa.
+
+El lenguaje diagonal (Sesi\'on~2) construy\'o un lenguaje que difiere de cada m\'aquina de Turing supuestamente completa.
+
+G\"odel construy\'o una oraci\'on $G$ que dice: ``\textit{Yo no soy demostrable}.'' Si el sistema la demuestra, hay contradicci\'on. Si no la demuestra, hay una verdad que el sistema no puede alcanzar.
+
+\medskip
+\textbf{La misma estructura. Las tres veces.} Un objeto construido para diferir de todo lo que el sistema puede nombrar.
+
+\medskip
+\textbf{Resultado:} toda teor\'ia $T$ que extienda la aritm\'etica de Peano, sea consistente y recursivamente axiomatizable es \emph{incompleta}: hay oraciones verdaderas en $\mathbb{N}$ que $T$ no puede demostrar.
+\end{diagonal}
+
+\subsubsection{5.3 --- El Segundo Teorema de Incompletitud}
+\begin{itemize}
+  \item $\text{Cons}(T)$: ``$T$ es consistente'' (expresable en aritm\'etica).
+  \item \textbf{Resultado:} $T\not\vdash\text{Cons}(T)$. Ning\'un sistema suficientemente fuerte puede demostrar su propia consistencia.
+  \item El programa de Hilbert es inalcanzable.
+\end{itemize}
+
+\subsubsection{5.4 --- Computabilidad y el Problema de la Parada}
+\begin{itemize}
+  \item M\'aquina de Turing: $M=(Q,\Sigma,\Gamma,\delta,q_0,q_\text{acc},q_\text{rej})$.
+  \item \textbf{Teorema (Turing 1936):} $A_\text{TM}=\{\langle M,w\rangle\mid M\text{ acepta }w\}$ es indecidible.
+  \item Demostraci\'on por diagonalizaci\'on --- paralelo exacto con Cantor y G\"odel.
+  \item Tesis de Church-Turing.
+\end{itemize}
+
+\subsubsection{5.5 --- El Argumento Diagonal y la Conciencia}
+\begin{itemize}
+  \item Si el cerebro fuera un sistema formal, G\"odel dice que habr\'ia verdades que podr\'ia \emph{ver} pero no \emph{demostrar} dentro de s\'i mismo.
+  \item Sin embargo, nosotros \emph{vemos} la verdad de la oraci\'on de G\"odel. ¿Qu\'e implica eso?
+  \item El argumento de Penrose-Lucas: la mente no es un sistema formal.
+  \item La respuesta de Hofstadter: la conciencia \emph{es} el bucle extra\~no --- la autoreferencia misma.
+  \item No hay conclusi\'on obligatoria. Hay una pregunta que se llevan a casa.
+  \item Esta pregunta es el tema de la pr\'oxima sesi\'on.
+\end{itemize}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Reconocer la estructura com\'un del argumento diagonal en Cantor, G\"odel y Turing.
+  \item Enunciar con precisi\'on el primer y segundo teorema de G\"odel y sus hip\'otesis.
+  \item Demostrar la indecidibilidad del problema de la parada.
+  \item Formular en sus propias palabras la conexi\'on entre incompletitud y conciencia --- sin resolverla.
+\end{itemize}
+\end{objetivos}
+
+\begin{lecturas}
+\begin{itemize}
+  \item[$(\star)$] \textbf{Sipser, M.} --- \emph{Introduction to the Theory of Computation}, 3.a ed. Cap\'itulos~4 y 6 \S6.1--6.2 (pp.\ 165--196, 238--247).
+  \item[$(\star)$] \textbf{Hofstadter, D. R.} --- \emph{G\"odel, Escher, Bach}. Cap\'itulos IX, X, XI y XIV (pp.\ 260--290, 438--460).
+  \item[$(\star)$] \textbf{Nagel, E., \& Newman, J. R.} --- \emph{G\"odel's Proof}, ed.\ revisada. Cap\'itulos V--VII (pp.\ 51--100).
+  \item \textbf{Penrose, R.} --- \emph{The Emperor's New Mind}. Cap\'itulo~10 ``Where Lies the Physics of Mind?'' (pp.\ 391--447). \textit{Lectura preparatoria para la Sesi\'on~6. Penrose puede estar equivocado --- esa es parte del punto.}
+  \item \textbf{Hofstadter, D. R., \& Dennett, D. C.} --- \emph{The Mind's I}. Selecci\'on de cap\'itulos a criterio del alumno.
+\end{itemize}
+\end{lecturas}
+
+\newpage
+
+% ============================================================
+%  SESIÓN 6 — PERIPATÉTICA
+% ============================================================
+\section{Sesi\'on 6 --- Di\'alogo Perip\'atet\'ico: El Infinito, la Conciencia y los L\'imites de la Raz\'on}
+
+\begin{peripatetic}
+Esta sesi\'on no tiene sal\'on. No hay pizarr\'on, no hay diapositivas, no hay notas de clase.
+El lugar: al aire libre, con vegetaci\'on y sombra. El formato: el TA presenta una historia o lanza una pregunta. Los estudiantes hablan. El TA escucha, responde, y puede perder el argumento. Eso est\'a bien. Eso es el punto.
+\end{peripatetic}
+
+\vspace{0.5em}
+
+\subsection*{Contexto}
+
+En la Atenas del siglo V a.C., los sof\'istas ven\'ian la persuasi\'on como un servicio. Argumentaban cualquier lado de cualquier pregunta por honorarios. Prot\'agoras afirmaba que ``el hombre es la medida de todas las cosas'' --- que no hay verdad independiente del observador. S\'ocrates los desafiaba en p\'ublico, en las calles, sin cobrar. Su m\'etodo: hacer preguntas hasta que el argumento colapsara por su propio peso.
+
+Vivimos en un nuevo per\'iodo sof\'ista. Todo se relativiza, todo se vende, toda verdad tiene un precio o un sesgo. Las cinco sesiones anteriores de este curso fueron la respuesta t\'ecnica a eso: un lugar donde la verdad no se negocia. Esta sesi\'on es la pregunta que queda despu\'es de esa respuesta.
+
+\subsection*{C\'omo funciona}
+
+\begin{enumerate}
+  \item El TA narra una historia (aproximadamente 20 minutos). Sin interrupciones.
+  \item El TA formula una pregunta y deja de hablar.
+  \item Los estudiantes responden, discuten, contradicen --- entre ellos y con el TA.
+  \item No hay conclusi\'on obligatoria. La sesi\'on termina cuando termina el tiempo, no cuando se llega a un acuerdo.
+\end{enumerate}
+
+\subsection*{La Narrativa}
+
+El TA cuenta la historia de Georg Cantor: un matem\'atico alem\'an del siglo XIX que propuso que hay infinitos m\'as grandes que otros. Que entre el 0 y el 1 hay m\'as n\'umeros reales que n\'umeros naturales en toda la l\'inea. Que el conjunto de todos los subconjuntos de un conjunto infinito es estrictamente m\'as grande que el conjunto original.
+
+Sus contempor\'aneos lo atacaron. Leopold Kronecker --- uno de los matem\'aticos m\'as influyentes de la \'epoca --- lo llam\'o ``corrompedor de la juventud'' y ``hereje matem\'atico''. Lo bloque\'o sistem\'aticamente. Cantor sufri\'o varias crisis nerviosas y muri\'o en un sanatorio en 1918.
+
+Hoy sus ideas son el fundamento de la matem\'atica moderna. La Academ\'ia tard\'o d\'ecadas en darle la raz\'on.
+
+Luego el TA describe el argumento diagonal --- no como demostraci\'on t\'ecnica, sino como historia: un n\'umero construido para escapar de cualquier lista que intente atraparlo. Y lo conecta con G\"odel: una oraci\'on construida para escapar de cualquier sistema que intente demostrarla. Y con Turing: un programa construido para escapar de cualquier m\'aquina que intente decidirlo.
+
+\subsection*{La Pregunta}
+
+\begin{tcolorbox}[colback=outdoorgreen!5, colframe=outdoorgreen, boxrule=0.7pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt]
+{\itshape ``Si el cerebro es un sistema formal --- y hay razones para creerlo --- entonces G\"odel dice que hay verdades que puede ver pero no demostrar dentro de s\'i mismo. Pero nosotros \emph{vemos} que la oraci\'on de G\"odel es verdadera. ¿Eso significa que hay algo en ustedes que no es un sistema formal? ¿O significa que la conciencia \emph{es} exactamente el tipo de bucle que se dobla sobre s\'i mismo y por eso cree que ve algo que ning\'un algoritmo puede ver?
+
+\medskip
+¿Tienen alma, o son una m\'aquina de Turing suficientemente compleja?''}
+
+\medskip
+\hfill --- El TA lanza esta pregunta y se sienta.
+\end{tcolorbox}
+
+\subsection*{Notas para el TA}
+
+No hay respuesta correcta. Penrose dice que hay algo no computable en la conciencia. Hofstadter dice que el bucle extra\~no \emph{es} la conciencia, no su negaci\'on. Dennett dice que la sensaci\'on de ver la verdad G\"odeliana es una ilusi\'on bien construida. Los tres son matem\'aticamente serios. Los tres pueden estar equivocados.
+
+El objetivo no es resolver la pregunta. Es que los estudiantes experimenten lo que se siente cuando una idea rigurosa choca con una pregunta que la raz\'on sola no puede responder. Eso es filosof\'ia. Eso es lo que Cantor enfrent\'o solo. Eso es lo que la pr\'oxima generaci\'on de ingenieros necesita saber que existe.
+
+\begin{lecturas}
+\begin{itemize}
+  \item[$(\star)$] \textbf{Hofstadter, D. R.} --- \emph{G\"odel, Escher, Bach}. Cap\'itulos sobre los Bucles Extra\~nos y la conciencia (pp.\ 684--742). \textit{El argumento completo de Hofstadter.}
+  \item[$(\star)$] \textbf{Aczel, A. D.} --- \emph{The Mystery of the Aleph: Mathematics, the Kabbalah, and the Search for Infinity}. Biograf\'ia narrativa de Cantor --- accesible y perturbadora.
+  \item \textbf{Penrose, R.} --- \emph{The Emperor's New Mind}. Cap\'itulo~10 (pp.\ 391--447).
+  \item \textbf{Nagel, T.} --- ``What Is It Like to Be a Bat?''. \textit{The Philosophical Review}, 83(4), pp.\ 435--450 (1974). \textit{El problema de la experiencia subjetiva --- 10 p\'aginas que no se olvidan.}
+\end{itemize}
+\end{lecturas}
+
+\newpage
+
+% ============================================================
+%  SESIÓN 7 — EL PUENTE
+% ============================================================
+\section{Sesi\'on 7 --- \textit{El Puente}: \'Algebra de Boole, Computabilidad y la F\'isica del Silicio}
+
+\textcolor{mitred}{\textbf{Clase de transici\'on. El nivel de abstracci\'on comienza a descender.}}
+
+\begin{prereqs}
+Sesiones 1--6. Esta sesi\'on sintetiza la primera mitad y abre la segunda.
+\end{prereqs}
+
+\subsection*{Motivaci\'on}
+Hemos demostrado que la l\'ogica tiene l\'imites infranqueables y que la conciencia puede ser el bucle que esos l\'imites generan. Ahora bajamos: ¿c\'omo se materializa la computaci\'on en \'atomos? En tres pasos: reducimos la l\'ogica a \'algebra (Boole/Shannon), mostramos que cualquier c\'omputo reducible a operaciones booleanas sobre bits, y demostramos que esos bits existen solo porque el silicio tiene una propiedad termodin\'amica espec\'ifica.
+
+\subsection{Contenidos}
+
+\subsubsection{7.1 --- \'Algebra de Boole}
+\begin{itemize}
+  \item \'Algebra de Boole $(B,+,\cdot,\bar{\phantom{x}},0,1)$: axiomas de Huntington.
+  \item Funciones booleanas de $n$ variables: $2^{2^n}$ funciones posibles.
+  \item \textbf{Teorema de Shannon (1938):} toda funci\'on booleana es implementable con AND, OR, NOT.
+  \item Corolario: $\{\text{NAND}\}$ es funcionalmente completo --- demostrado en la Sesi\'on~3, ahora con consecuencias f\'isicas.
+\end{itemize}
+
+\subsubsection{7.2 --- De la M\'aquina de Turing al Circuito Digital}
+\begin{itemize}
+  \item Circuito secuencial: a\~nade memoria (biestables $D$). Estado = cinta de Turing.
+  \item La CPU como M\'aquina de Turing finita: contador de programa, registros, ALU.
+  \item Por qu\'e la fisicalidad no supera los l\'imites de Turing: cualquier CPU ejecuta un lenguaje recursivamente enumerable. El problema de la parada no lo resuelve ning\'un chip, por r\'apido que sea.
+\end{itemize}
+
+\subsubsection{7.3 --- La Ilusi\'on del Bit}
+\begin{itemize}
+  \item Un bit requiere un sistema f\'isico biestable con \emph{regeneraci\'on}.
+  \item Dispositivo lineal: $V_\text{out}=\alpha V_\text{in}$ --- no puede rechazar ruido. No sirve.
+  \item La l\'ogica binaria exige un sustrato material no lineal con ganancia.
+\end{itemize}
+
+\subsubsection{7.4 --- Qu\'imica del Silicio y el Bandgap como Energ\'ia de Activaci\'on}
+\begin{itemize}
+  \item Silicio a $0\,\text{K}$: 4 enlaces covalentes perfectos. Sin portadores libres.
+  \item El \emph{bandgap} $E_g=1{,}12\,\text{eV}$: energ\'ia m\'inima para romper un enlace covalente.
+  \item A $T=300\,\text{K}$: $k_BT\approx 26\,\text{meV}\ll E_g$. La fracci\'on de enlaces rotos es peque\~na y controlable.
+  \item \textbf{Ejercicio de exploraci\'on:} a qu\'e temperatura $T^*$ la concentraci\'on intr\'inseca $n_i(T)$ alcanza el umbral dopante $n_d=10^{16}\,\text{cm}^{-3}$ y el chip ``olvida'' su l\'ogica:
+  \[n_i(T)\approx\sqrt{N_cN_v}\exp\!\left(-\frac{E_g}{2k_BT}\right)\]
+\end{itemize}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Demostrar que toda funci\'on booleana es realizable con compuertas NAND.
+  \item Justificar por qu\'e un sistema f\'isico de l\'ogica binaria exige no-linealidad con ganancia.
+  \item Calcular la temperatura de colapso l\'ogico de un chip de silicio dopado.
+  \item Enunciar el nexo completo: G\"odel $\to$ Turing $\to$ Boole $\to$ Silicio.
+\end{itemize}
+\end{objetivos}
+
+\begin{lecturas}
+\begin{itemize}
+  \item[$(\star)$] \textbf{Shannon, C. E.} (1938) --- ``A Symbolic Analysis of Relay and Switching Circuits''. \textit{Transactions of the AIEE}, 57, pp.\ 713--723. \textit{Fuente primaria, disponible en l\'inea.}
+  \item[$(\star)$] \textbf{Streetman, B. G., \& Banerjee, S. K.} --- \emph{Solid State Electronic Devices}, 7.a ed. Cap\'itulo~2 \S2.1--2.3 (pp.\ 31--60).
+  \item \textbf{Tanenbaum, A. S., \& Austin, T.} --- \emph{Structured Computer Organization}, 6.a ed. Cap\'itulo~1 (pp.\ 1--35).
+\end{itemize}
+\end{lecturas}
+
+\newpage
+
+% ============================================================
+%  SESIÓN 8
+% ============================================================
+\section{Sesi\'on 8 --- Semiconductores: Estad\'istica de Fermi-Dirac y Dopaje}
+
+\begin{prereqs}
+Sesi\'on 7. Concepto de \emph{bandgap} como barrera termodin\'amica, c\'alculo de $n_i(T)$.
+\end{prereqs}
+
+\subsection*{Motivaci\'on}
+El c\'alculo del chip que ``olvida'' su l\'ogica requiri\'o la funci\'on $n_i(T)$. Esta sesi\'on la deriva desde primeros principios de la mec\'anica estad\'istica. No es un resultado que se acepta --- es un resultado que se demuestra desde el principio de exclusi\'on de Pauli.
+
+\subsection{Contenidos}
+
+\subsubsection{8.1 --- La Distribuci\'on de Fermi-Dirac}
+\begin{itemize}
+  \item Principio de exclusi\'on de Pauli: dos fermiones no pueden ocupar el mismo estado.
+  \item Probabilidad de ocupaci\'on de un estado de energ\'ia $E$:
+    \[f(E)=\frac{1}{1+e^{(E-E_F)/k_BT}}\]
+  \item El nivel de Fermi $E_F$: $f(E_F)=\frac{1}{2}$.
+  \item L\'imites: $T\to 0$ (funci\'on escal\'on) y aproximaci\'on de Boltzmann cuando $E-E_F\gg k_BT$.
+\end{itemize}
+
+\subsubsection{8.2 --- Concentraci\'on de Portadores}
+\begin{itemize}
+  \item Densidades de estados efectivas $N_c$ y $N_v$.
+  \item Concentraciones: $n=N_c e^{-(E_c-E_F)/k_BT}$,\quad $p=N_v e^{-(E_F-E_v)/k_BT}$.
+  \item Producto de portadores en equilibrio: $np=n_i^2(T)=N_cN_v e^{-E_g/k_BT}$.
+\end{itemize}
+
+\subsubsection{8.3 --- Dopaje y Equilibrio Qu\'imico}
+\begin{itemize}
+  \item Donadores (f\'osforo): $N_D$. Aceptores (boro): $N_A$.
+  \item Neutralidad: $n+N_A^-=p+N_D^+$.
+  \item Tipo N: $n\approx N_D$,\; $p\approx n_i^2/N_D$.
+  \item Tipo P: $p\approx N_A$,\; $n\approx n_i^2/N_A$.
+  \item \textbf{Ley de acci\'on de masas} $np=n_i^2$: an\'alogo exacto de la constante de equilibrio $K_{eq}$ en cin\'etica qu\'imica.
+\end{itemize}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Derivar $f(E)$ desde el principio de exclusi\'on de Pauli y la maximizaci\'on de entrop\'ia.
+  \item Calcular $n$, $p$ y $E_F$ para un semiconductor dopado a temperatura ambiente.
+  \item Verificar num\'ericamente la ley $np=n_i^2$.
+\end{itemize}
+\end{objetivos}
+
+\begin{lecturas}
+\begin{itemize}
+  \item[$(\star)$] \textbf{Streetman, B. G., \& Banerjee, S. K.} --- \emph{Solid State Electronic Devices}, 7.a ed. Cap\'itulo~3 (pp.\ 61--120).
+  \item[$(\star)$] \textbf{Kittel, C., \& Kroemer, H.} --- \emph{Thermal Physics}, 2.a ed. Cap\'itulo~7 (pp.\ 155--182).
+  \item \textbf{Neamen, D. A.} --- \emph{Semiconductor Physics and Devices}, 4.a ed. Cap\'itulo~4 (pp.\ 107--156).
+\end{itemize}
+\end{lecturas}
+
+\newpage
+
+% ============================================================
+%  SESIÓN 9
+% ============================================================
+\section{Sesi\'on 9 --- La Uni\'on PN y el Diodo: Termodin\'amica de No Equilibrio}
+
+\begin{prereqs}
+Sesi\'on 8. Concentraciones de portadores, nivel de Fermi, ley de acci\'on de masas.
+\end{prereqs}
+
+\subsection*{Motivaci\'on}
+Yuxtaponer dos semiconductores de tipo opuesto crea espont\'aneamente una barrera de potencial. Aplicar un voltaje externo controla esa barrera y produce el flujo unidireccional de carga. Este comportamiento no lineal es el primer ladrillo del interruptor l\'ogico --- y la primera vez que vemos la no-linealidad que la Sesi\'on~7 exig\'ia.
+
+\subsection{Contenidos}
+
+\subsubsection{9.1 --- La Regi\'on de Agotamiento y el Potencial Built-in}
+\begin{itemize}
+  \item Difusi\'on cruzada: los portadores mayoritarios crean una zona sin portadores libres.
+  \item Campo el\'ectrico $\mathcal{E}(x)$: soluci\'on de la ecuaci\'on de Poisson.
+  \item Potencial de contacto:
+    \[V_0=\frac{k_BT}{q}\ln\frac{N_AN_D}{n_i^2}\]
+\end{itemize}
+
+\subsubsection{9.2 --- Corrientes de Difusi\'on y Arrastre}
+\begin{itemize}
+  \item Corriente de difusi\'on (Ley de Fick):
+    $J_n^\text{dif}=eD_n\dfrac{dn}{dx}$,\quad $J_p^\text{dif}=-eD_p\dfrac{dp}{dx}$.
+  \item Corriente de arrastre: $J_n^\text{arr}=e\mu_n n\mathcal{E}$.
+  \item Relaci\'on de Einstein:
+    $\dfrac{D_n}{\mu_n}=\dfrac{D_p}{\mu_p}=\dfrac{k_BT}{q}=V_T\approx 25{,}9\,\text{mV}$ a $300\,\text{K}$.
+\end{itemize}
+
+\subsubsection{9.3 --- La Ecuaci\'on de Shockley}
+\begin{itemize}
+  \item Inyecci\'on de minoritarios con polarizaci\'on directa $V_A>0$.
+  \item Perfil exponencial con longitud de difusi\'on $L_p=\sqrt{D_p\tau_p}$.
+  \item Derivaci\'on de la corriente total:
+    \[I_D=I_s\left(e^{V_A/V_T}-1\right)\]
+  \item La no-linealidad es exactamente la que la Sesi\'on~7 requiri\'o.
+\end{itemize}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Calcular $V_0$ y el ancho de agotamiento $W$ para una uni\'on P$^+$N dada.
+  \item Derivar la relaci\'on de Einstein desde condiciones de equilibrio.
+  \item Obtener la ecuaci\'on de Shockley desde las ecuaciones de transporte y condiciones de borde.
+\end{itemize}
+\end{objetivos}
+
+\begin{lecturas}
+\begin{itemize}
+  \item[$(\star)$] \textbf{Streetman, B. G., \& Banerjee, S. K.} --- \emph{Solid State Electronic Devices}, 7.a ed. Cap\'itulo~5 (pp.\ 163--220).
+  \item[$(\star)$] \textbf{Sedra, A. S., \& Smith, K. C.} --- \emph{Microelectronic Circuits}, 7.a ed. Cap\'itulo~4 \S4.1--4.4 (pp.\ 155--196).
+  \item \textbf{Sze, S. M., \& Ng, K. K.} --- \emph{Physics of Semiconductor Devices}, 3.a ed. Cap\'itulo~2 (pp.\ 79--124).
+\end{itemize}
+\end{lecturas}
+
+\newpage
+
+% ============================================================
+%  SESIÓN 10
+% ============================================================
+\section{Sesi\'on 10 --- El Transistor MOSFET y las Compuertas CMOS}
+
+\begin{prereqs}
+Sesiones 8 y 9. Portadores, campo el\'ectrico en la uni\'on, control por voltaje.
+\end{prereqs}
+
+\subsection*{Motivaci\'on}
+$\sim 10^{22}$ transistores fabricados a la fecha de este curso. Cada uno es la implementaci\'on f\'isica de una operaci\'on l\'ogica. Esta sesi\'on cierra el c\'irculo: el Modus Ponens de la Sesi\'on~3 construido en silicio.
+
+\subsection{Contenidos}
+
+\subsubsection{10.1 --- Estructura y Operaci\'on del MOSFET}
+\begin{itemize}
+  \item Geometr\'ia: compuerta, \'oxido (SiO$_2$), canal, fuente, drenador, sustrato.
+  \item Tensi\'on umbral $V_{TH}$: voltaje m\'inimo para formar el canal de inversi\'on.
+  \item Regiones: corte ($V_{GS}<V_{TH}$), triodo, saturaci\'on.
+\end{itemize}
+
+\subsubsection{10.2 --- Derivaci\'on de la Ecuaci\'on de Corriente}
+\begin{itemize}
+  \item Carga de inversi\'on: $Q_n(x)=-C_{ox}(V_{GS}-V_{TH}-V(x))$.
+  \item Integraci\'on a lo largo del canal (longitud $L$):
+    \[I_D=\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2\quad(\text{saturaci\'on})\]
+\end{itemize}
+
+\subsubsection{10.3 --- Implementaci\'on L\'ogica CMOS}
+\begin{itemize}
+  \item Par CMOS: NMOS (red Pull-Down) + PMOS (red Pull-Up). Consumo est\'atico nulo.
+  \item Inversor CMOS: curva de transferencia.
+  \item Compuertas NAND y NOR: derivaci\'on de la tabla de verdad desde las redes P/D.
+  \item \textbf{Cierre conceptual:} la red Pull-Down implementa la funci\'on booleana directa. La Pull-Up implementa su complemento. Modus Ponens en silicio.
+  \item M\'argenes de ruido: por qu\'e la curva del inversor garantiza los estados l\'ogicos.
+\end{itemize}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Derivar la ecuaci\'on de saturaci\'on del MOSFET a partir del modelo de carga de canal.
+  \item Dise\~nar la red Pull-Up/Pull-Down para una funci\'on l\'ogica de 2 variables.
+  \item Calcular los m\'argenes de ruido de un inversor CMOS dado.
+\end{itemize}
+\end{objetivos}
+
+\begin{lecturas}
+\begin{itemize}
+  \item[$(\star)$] \textbf{Sedra, A. S., \& Smith, K. C.} --- \emph{Microelectronic Circuits}, 7.a ed. Cap\'itulo~5 \S5.1--5.4 (pp.\ 230--300) y \S14.1--14.3 (pp.\ 740--770).
+  \item[$(\star)$] \textbf{Streetman, B. G., \& Banerjee, S. K.} --- \emph{Solid State Electronic Devices}, 7.a ed. Cap\'itulo~6 (pp.\ 255--310).
+  \item \textbf{Weste, N. H. E., \& Harris, D.} --- \emph{CMOS VLSI Design}, 4.a ed. Cap\'itulo~1 (pp.\ 1--40).
+\end{itemize}
+\end{lecturas}
+
+\newpage
+
+% ============================================================
+%  SESIÓN 11
+% ============================================================
+\section{Sesi\'on 11 --- Sistemas Din\'amicos y Filtros en el Dominio $s$}
+
+\begin{prereqs}
+Sesi\'on 10; c\'alculo diferencial e integral, ecuaciones diferenciales ordinarias de primer y segundo orden.
+\end{prereqs}
+
+\subsection*{Motivaci\'on}
+Los circuitos no son est\'aticos. La Transformada de Laplace convierte ecuaciones diferenciales en \'algebra, permitiendo analizar estabilidad y dise\~nar filtros. Es tambi\'en el formalismo que cierra el arco del curso: la l\'ogica discreta de bits se inserta dentro de un mundo anal\'ogico continuo que obedece ecuaciones diferenciales.
+
+\subsection{Contenidos}
+
+\subsubsection{11.1 --- Modelado Din\'amico de Circuitos}
+\begin{itemize}
+  \item Ecuaciones constitutivas: $v_R=Ri$, $v_L=L\dot{i}$, $i_C=C\dot{v}$.
+  \item Circuito RLC serie: ecuaci\'on diferencial de segundo orden.
+\end{itemize}
+
+\subsubsection{11.2 --- La Transformada de Laplace}
+\begin{itemize}
+  \item Definici\'on y regi\'on de convergencia (ROC):
+    \[\mathcal{L}\{f(t)\}=F(s)=\int_0^\infty f(t)\,e^{-st}\,dt,\quad s\in\mathbb{C}\]
+  \item Propiedades: linealidad, diferenciaci\'on $\mathcal{L}\{\dot{f}\}=sF(s)-f(0^-)$, integraci\'on.
+  \item Transformada inversa: fracciones parciales.
+\end{itemize}
+
+\subsubsection{11.3 --- El Plano $s$ y Funciones de Transferencia}
+\begin{itemize}
+  \item $H(s)=Y(s)/X(s)$. Polos y ceros.
+  \item Estabilidad BIBO: todos los polos en $\text{Re}(s)<0$.
+  \item Respuesta en frecuencia: $H(j\omega)=H(s)|_{s=j\omega}$.
+\end{itemize}
+
+\subsubsection{11.4 --- Filtros Activos de Segundo Orden}
+\begin{itemize}
+  \item Funci\'on de transferencia bicuadr\'atica:
+    \[H(s)=\frac{a_2s^2+a_1s+a_0}{s^2+(\omega_0/Q)s+\omega_0^2}\]
+  \item Topolog\'ia Sallen-Key: dise\~no alg\'ebrico con amplificadores operacionales.
+  \item Diagramas de Bode: pendiente $\pm 20n\,\text{dB/dec}$, ca\'ida de $-3\,\text{dB}$.
+\end{itemize}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Obtener la funci\'on de transferencia de un circuito RLC y de un filtro Sallen-Key.
+  \item Localizar polos y ceros en el plano $s$ y deducir estabilidad y comportamiento transitorio.
+  \item Dise\~nar un filtro pasa-bajas de segundo orden con $\omega_0$ y $Q$ dados.
+\end{itemize}
+\end{objetivos}
+
+\begin{lecturas}
+\begin{itemize}
+  \item[$(\star)$] \textbf{Oppenheim, A. V., \& Willsky, A. S.} --- \emph{Signals and Systems}, 2.a ed. Cap\'itulo~9 (pp.\ 654--720).
+  \item[$(\star)$] \textbf{Sedra, A. S., \& Smith, K. C.} --- \emph{Microelectronic Circuits}, 7.a ed. Cap\'itulo~16 \S16.1--16.5 (pp.\ 857--910).
+  \item \textbf{Ogata, K.} --- \emph{Modern Control Engineering}, 5.a ed. Cap\'itulo~2 \S2.1--2.4 (pp.\ 17--55).
+\end{itemize}
+\end{lecturas}
+
+\newpage
+
+% ============================================================
+%  BIBLIOGRAFÍA CONSOLIDADA
+% ============================================================
+\section{Bibliograf\'ia Consolidada}
+
+\subsection*{L\'ogica, Conjuntos y Fundamentos}
+\begin{itemize}
+  \item \textbf{Halmos, P. R.} --- \emph{Naive Set Theory}. Springer, 1974.
+  \item \textbf{Enderton, H. B.} --- \emph{A Mathematical Introduction to Logic}, 2.a ed. Academic Press, 2001.
+  \item \textbf{Enderton, H. B.} --- \emph{Elements of Set Theory}. Academic Press, 1977.
+  \item \textbf{Deaño, A.} --- \emph{Introducci\'on a la l\'ogica formal}. Alianza Editorial, 1999. \textit{[Principal referencia en espa\~nol].}
+  \item \textbf{Mendelson, E.} --- \emph{Introduction to Mathematical Logic}, 6.a ed. CRC Press, 2015.
+  \item \textbf{Marker, D.} --- \emph{Model Theory: An Introduction}. Springer, 2002.
+\end{itemize}
+
+\subsection*{Metamatem\'atica, Incompletitud y Computabilidad}
+\begin{itemize}
+  \item \textbf{Hofstadter, D. R.} --- \emph{G\"odel, Escher, Bach: An Eternal Golden Braid}. Basic Books, 1979. \textit{[Lectura transversal de todo el curso. No opcional.]}
+  \item \textbf{Hofstadter, D. R., \& Dennett, D. C.} --- \emph{The Mind's I}. Basic Books, 1981.
+  \item \textbf{Nagel, E., \& Newman, J. R.} --- \emph{G\"odel's Proof}, ed.\ revisada. NYU Press, 2001.
+  \item \textbf{Sipser, M.} --- \emph{Introduction to the Theory of Computation}, 3.a ed. Cengage, 2012.
+  \item \textbf{Hopcroft, J. E., Motwani, R., \& Ullman, J. D.} --- \emph{Introduction to Automata Theory}, 3.a ed. Pearson, 2006.
+\end{itemize}
+
+\subsection*{Filosof\'ia de la Matem\'atica y la Conciencia}
+\begin{itemize}
+  \item \textbf{Penrose, R.} --- \emph{The Emperor's New Mind}. Oxford University Press, 1989.
+  \item \textbf{Nagel, T.} --- ``What Is It Like to Be a Bat?''. \textit{The Philosophical Review}, 83(4), 1974.
+  \item \textbf{Aczel, A. D.} --- \emph{The Mystery of the Aleph}. Four Walls Eight Windows, 2000.
+  \item \textbf{Chomsky, N.} --- \emph{Syntactic Structures}, 2.a ed. Mouton de Gruyter, 2002.
+\end{itemize}
+
+\subsection*{\'Algebra de Boole y Arquitectura}
+\begin{itemize}
+  \item \textbf{Shannon, C. E.} (1938) --- ``A Symbolic Analysis of Relay and Switching Circuits''. \textit{Transactions of the AIEE}, 57, pp.\ 713--723.
+  \item \textbf{Tanenbaum, A. S., \& Austin, T.} --- \emph{Structured Computer Organization}, 6.a ed. Pearson, 2012.
+\end{itemize}
+
+\subsection*{F\'isica de Semiconductores y Electr\'onica}
+\begin{itemize}
+  \item \textbf{Streetman, B. G., \& Banerjee, S. K.} --- \emph{Solid State Electronic Devices}, 7.a ed. Pearson, 2015. \textit{[Referencia principal para semiconductores.]}
+  \item \textbf{Neamen, D. A.} --- \emph{Semiconductor Physics and Devices}, 4.a ed. McGraw-Hill, 2012.
+  \item \textbf{Sze, S. M., \& Ng, K. K.} --- \emph{Physics of Semiconductor Devices}, 3.a ed. Wiley, 2007.
+  \item \textbf{Kittel, C., \& Kroemer, H.} --- \emph{Thermal Physics}, 2.a ed. Freeman, 1980.
+  \item \textbf{Sedra, A. S., \& Smith, K. C.} --- \emph{Microelectronic Circuits}, 7.a ed. Oxford University Press, 2014. \textit{[Referencia principal para circuitos.]}
+  \item \textbf{Weste, N. H. E., \& Harris, D.} --- \emph{CMOS VLSI Design}, 4.a ed. Pearson, 2011.
+\end{itemize}
+
+\subsection*{Se\~nales y Sistemas}
+\begin{itemize}
+  \item \textbf{Oppenheim, A. V., \& Willsky, A. S.} --- \emph{Signals and Systems}, 2.a ed. Prentice Hall, 1997.
+  \item \textbf{Ogata, K.} --- \emph{Modern Control Engineering}, 5.a ed. Pearson, 2010.
+\end{itemize}
+
+\newpage
+
+% ============================================================
+%  POLÍTICAS
+% ============================================================
+\section{Pol\'iticas del Curso}
+
+\subsection*{Sobre la calificaci\'on}
+No hay calificaciones. No hay examen parcial ni final. No hay proyecto con fecha de entrega. Los ejercicios de exploraci\'on que aparecen en cada sesi\'on no se entregan ni se revisan --- existen para que el alumno descubra los huecos en su propia comprensi\'on y los traiga como preguntas.
+
+Este curso no mide. Acompa\~na.
+
+\subsection*{Sobre la asistencia}
+La asistencia no se controla formalmente. Pero el curso est\'a dise\~nado como una secuencia con dependencias estrictas: no entender la Sesi\'on~1 hace opaca la Sesi\'on~2, y as\'i sucesivamente. Faltar tiene un costo t\'ecnico real, no administrativo.
+
+\subsection*{Sobre la contradicci\'on}
+Si en cualquier momento --- en sesi\'on, al aire libre, en los pasillos --- crees que algo est\'a mal demostrado: dilo. Con argumento. El TA puede estar equivocado. Los libros pueden estar incompletos. La \'unica respuesta inaceptable es quedarse callado por respeto jer\'arquico.
+
+\subsection*{Sobre el GEB}
+\emph{G\"odel, Escher, Bach} es lectura transversal del curso entero, no bibliograf\'ia opcional. No se espera que se entienda todo en la primera lectura. Se espera que genere preguntas. Llevar esas preguntas a clase es la forma m\'as valiosa de participar.
+
+\vspace{2cm}
+
+\begin{center}
+\textcolor{mitred}{\rule{0.5\linewidth}{0.6pt}}\\[0.4em]
+{\small\itshape ``Dios existe porque la Matem\'atica es consistente,\\
+y el Diablo existe porque no podemos demostrarlo.''}\\[0.3em]
+{\footnotesize --- Andr\'e Weil}\\[0.8em]
+{\small\itshape ``El universo no puede ser le\'ido hasta que hayamos aprendido\\
+su lenguaje y nos hayamos familiarizado con los caracteres en que est\'a escrito.\\
+Est\'a escrito en lenguaje matem\'atico.''}\\[0.3em]
+{\footnotesize --- Galileo Galilei, \textit{Il Saggiatore} (1623)}\\
+\textcolor{mitred}{\rule{0.5\linewidth}{0.6pt}}
+\end{center}
+
+\end{document}

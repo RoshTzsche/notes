@@ -1,0 +1,15 @@
+\frametitle{Ingeniería: Eficiencia con \textit {Stride Tricks}}
+Evitamos copiar gigabytes de datos en RAM (Complejidad $\mathcal{O}(1)$ en espacio). Transformamos el tensor mapeando la \textbf{Matriz de Hankel} controlando la aritmética de punteros a nivel del CPU.
+
+    \vspace{0.3cm}
+    \begin{lstlisting}
+import numpy as np
+
+def embed_signal(x, m, tau):
+    """Inmersión topológica O(1) usando álgebra tensorial en NumPy"""
+    shape = (x.shape[0] - (m - 1) * tau, m)
+    strides = (x.strides[0], x.strides[0] * tau)
+
+    # Vista en memoria isomórfica al atractor, sin duplicación
+    return np.lib.stride_tricks.as_strided(x, shape, strides)
+    \end{lstlisting}

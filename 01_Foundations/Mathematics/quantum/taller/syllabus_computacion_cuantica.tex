@@ -1,0 +1,91 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}
+\usecolortheme{owl}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, braket, physics}
+
+\title{Syllabus: Introducción a la Computación Cuántica}
+\subtitle{Duración: 2 Horas | Nivel: Preparatoria Avanzada}
+\author{Documento de Planificación del Curso}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Resumen del Curso (1/2)}
+Este curso introductorio de dos horas ofrece una inmersión rigurosa en los fundamentos de la computación cuántica, estructurado específicamente para estudiantes de preparatoria con bases sólidas en matemáticas. El objetivo principal es transicionar del pensamiento clásico, basado en estados binarios definidos, al paradigma cuántico, donde la información se procesa mediante amplitudes de probabilidad complejas.
+
+A lo largo de la sesión, los estudiantes se familiarizarán con el formalismo matemático de la mecánica cuántica. Analizaremos cómo la superposición lineal y el entrelazamiento permiten el procesamiento paralelo de información a una escala inalcanzable para la computación clásica.
+\end{frame}
+
+\begin{frame}{Resumen del Curso (2/2)}
+El enfoque del curso será fundamentalmente analítico. En lugar de limitarnos a analogías cualitativas, exigiremos el uso de álgebra lineal avanzada. Modelaremos qubits como vectores en espacios de Hilbert complejos $\mathcal{H}$, y representaremos las compuertas lógicas como matrices unitarias $U$ que satisfacen $U^\dagger U = I$. 
+
+Al culminar las dos horas, los participantes comprenderán la mecánica subyacente de la evolución unitaria de sistemas de múltiples qubits y estarán preparados para derivar matemáticamente los resultados de algoritmos cuánticos elementales, comprendiendo la naturaleza estadística de la medición según el postulado de Born.
+\end{frame}
+
+\begin{frame}{Requisitos y Metodología}
+\textbf{Requisitos previos (Matemáticas Avanzadas):}
+\begin{itemize}
+    \item Dominio de números complejos (forma binómica y polar).
+    \item Fundamentos de álgebra lineal: multiplicación de matrices, vectores columna, y familiaridad conceptual con espacios vectoriales.
+\end{itemize}
+\vspace{0.5cm}
+\textbf{Metodología:}
+La instrucción combinará teoría intensiva con deducciones paso a paso en el pizarrón. Se presentarán problemas matemáticos que los estudiantes resolverán en tiempo real para asimilar la notación de Dirac (bra-ket).
+\end{frame}
+
+\begin{frame}{Temario: Bloque 1 - Cinemática del Qubit (30 min)}
+\textbf{1.1 El Postulado del Estado y el Espacio de Hilbert}
+\begin{itemize}
+    \item Definición del estado de un qubit: vector unitario en $\mathbb{C}^2$.
+    \item Notación de Dirac: $\ket{\psi} = \alpha\ket{0} + \beta\ket{1}$, sujeta a la restricción de normalización $\braket{\psi|\psi} = |\alpha|^2 + |\beta|^2 = 1$.
+\end{itemize}
+\textbf{1.2 Bases Alternativas y la Esfera de Bloch}
+\begin{itemize}
+    \item La base de superposición ortogonal: $\ket{\pm} = \frac{1}{\sqrt{2}}(\ket{0} \pm \ket{1})$.
+    \item Representación geométrica global de amplitudes complejas, expresando el estado genérico como $\ket{\psi} = \cos(\frac{\theta}{2})\ket{0} + e^{i\phi}\sin(\frac{\theta}{2})\ket{1}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Temario: Bloque 2 - Dinámica y Compuertas (30 min)}
+\textbf{2.1 Evolución Unitaria}
+\begin{itemize}
+    \item Operadores lineales como compuertas cuánticas. Propiedad unitaria $U^{-1} = U^\dagger$.
+\end{itemize}
+\textbf{2.2 Compuertas de Pauli y Hadamard}
+\begin{itemize}
+    \item Rotaciones fundamentales en $\mathbb{C}^2$: 
+    $\sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$, $\sigma_y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}$, $\sigma_z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$.
+    \item Derivación de la acción de Hadamard: $H\ket{0} = \ket{+}$ y $H\ket{1} = \ket{-}$ usando la matriz $H = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Temario: Bloque 3 - Sistemas Compuestos (30 min)}
+\textbf{3.1 El Producto Tensorial}
+\begin{itemize}
+    \item Construcción del espacio $\mathcal{H}_A \otimes \mathcal{H}_B$ de dimensión 4 para dos qubits.
+    \item Cálculo explícito del producto de Kronecker de vectores y matrices: $\ket{0} \otimes \ket{1} = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \otimes \begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix}$.
+\end{itemize}
+\textbf{3.2 Entrelazamiento Cuántico (Entanglement)}
+\begin{itemize}
+    \item Demostración matemática de la inseparabilidad de los estados de Bell, e.g., $\ket{\Phi^+} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}) \neq \ket{\psi_A} \otimes \ket{\psi_B}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Temario: Bloque 4 - Medición y Algoritmos (30 min)}
+\textbf{4.1 El Postulado de la Medición (Regla de Born)}
+\begin{itemize}
+    \item Cálculo de probabilidades $P(m) = \braket{\psi | M_m^\dagger M_m | \psi}$.
+    \item Colapso de la función de onda post-medición: $\ket{\psi'} = \frac{M_m\ket{\psi}}{\sqrt{P(m)}}$.
+\end{itemize}
+\textbf{4.2 Compuertas Controladas e Interferencia}
+\begin{itemize}
+    \item La compuerta $CNOT$: accionando $\sigma_x$ en el qubit objetivo condicionado al qubit de control.
+    \item Construcción del circuito para generar un estado de Bell: $CNOT \cdot (H \otimes I) \ket{00} = \ket{\Phi^+}$.
+\end{itemize}
+\end{frame}
+
+\end{document}

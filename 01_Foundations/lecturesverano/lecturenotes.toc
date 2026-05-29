@@ -1,0 +1,62 @@
+\contentsline {section}{Sobre el M\'etodo}{3}{Doc-Start}%
+\contentsline {section}{\numberline {1}Arco Narrativo del Curso}{4}{section.1}%
+\contentsline {section}{\numberline {2}Sesi\'on 1 --- Fundamentos: Conjuntos, Relaciones y Estructuras}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Contenidos}{5}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}1.1 --- Teor\'ia Ingenua de Conjuntos y la Paradoja de Russell}{5}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}1.2 --- Relaciones y Funciones}{5}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}1.3 --- Cardinalidad e Infinito}{5}{subsubsection.2.1.3}%
+\contentsline {section}{\numberline {3}Sesi\'on 2 --- Lenguajes Formales y la Jerarqu\'ia de Chomsky}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Contenidos}{7}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}2.1 --- Alfabetos, Cadenas y el Monoide Libre}{7}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}2.2 --- Gram\'aticas Formales}{7}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}2.3 --- La Jerarqu\'ia de Chomsky}{7}{subsubsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.4}2.4 --- Sintaxis vs.\ Sem\'antica}{7}{subsubsection.3.1.4}%
+\contentsline {section}{\numberline {4}Sesi\'on 3 --- L\'ogica Proposicional: Sintaxis, Sem\'antica y Prueba}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Contenidos}{9}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}3.1 --- Sintaxis del C\'alculo Proposicional}{9}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}3.2 --- Sem\'antica: Valuaciones y Tablas de Verdad}{9}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}3.3 --- Sistema de Prueba}{9}{subsubsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.4}3.4 --- Mapeo al Espa\~nol Natural}{9}{subsubsection.4.1.4}%
+\contentsline {section}{\numberline {5}Sesi\'on 4 --- L\'ogica de Primer Orden y Teor\'ia de Modelos}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Contenidos}{11}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}4.1 --- Sintaxis de la L\'ogica de Primer Orden}{11}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}4.2 --- Sem\'antica: Estructuras e Interpretaciones}{11}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}4.3 --- Teor\'ia de la Demostraci\'on en FOL}{11}{subsubsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.4}4.4 --- Resultados de Teor\'ia de Modelos (sin demostraci\'on)}{11}{subsubsection.5.1.4}%
+\contentsline {section}{\numberline {6}Sesi\'on 5 --- Metamatem\'atica, Incompletitud y Computabilidad}{13}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Contenidos}{13}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}5.1 --- La Aritm\'etica de Peano y la Aritmetizaci\'on}{13}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}5.2 --- El Primer Teorema de Incompletitud}{13}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}5.3 --- El Segundo Teorema de Incompletitud}{13}{subsubsection.6.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.4}5.4 --- Computabilidad y el Problema de la Parada}{14}{subsubsection.6.1.4}%
+\contentsline {subsubsection}{\numberline {6.1.5}5.5 --- El Argumento Diagonal y la Conciencia}{14}{subsubsection.6.1.5}%
+\contentsline {section}{\numberline {7}Sesi\'on 6 --- Di\'alogo Perip\'atet\'ico: El Infinito, la Conciencia y los L\'imites de la Raz\'on}{15}{section.7}%
+\contentsline {section}{\numberline {8}Sesi\'on 7 --- \textit {El Puente}: \'Algebra de Boole, Computabilidad y la F\'isica del Silicio}{17}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Contenidos}{17}{subsection.8.1}%
+\contentsline {subsubsection}{\numberline {8.1.1}7.1 --- \'Algebra de Boole}{17}{subsubsection.8.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.2}7.2 --- De la M\'aquina de Turing al Circuito Digital}{17}{subsubsection.8.1.2}%
+\contentsline {subsubsection}{\numberline {8.1.3}7.3 --- La Ilusi\'on del Bit}{17}{subsubsection.8.1.3}%
+\contentsline {subsubsection}{\numberline {8.1.4}7.4 --- Qu\'imica del Silicio y el Bandgap como Energ\'ia de Activaci\'on}{17}{subsubsection.8.1.4}%
+\contentsline {section}{\numberline {9}Sesi\'on 8 --- Semiconductores: Estad\'istica de Fermi-Dirac y Dopaje}{19}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Contenidos}{19}{subsection.9.1}%
+\contentsline {subsubsection}{\numberline {9.1.1}8.1 --- La Distribuci\'on de Fermi-Dirac}{19}{subsubsection.9.1.1}%
+\contentsline {subsubsection}{\numberline {9.1.2}8.2 --- Concentraci\'on de Portadores}{19}{subsubsection.9.1.2}%
+\contentsline {subsubsection}{\numberline {9.1.3}8.3 --- Dopaje y Equilibrio Qu\'imico}{19}{subsubsection.9.1.3}%
+\contentsline {section}{\numberline {10}Sesi\'on 9 --- La Uni\'on PN y el Diodo: Termodin\'amica de No Equilibrio}{21}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Contenidos}{21}{subsection.10.1}%
+\contentsline {subsubsection}{\numberline {10.1.1}9.1 --- La Regi\'on de Agotamiento y el Potencial Built-in}{21}{subsubsection.10.1.1}%
+\contentsline {subsubsection}{\numberline {10.1.2}9.2 --- Corrientes de Difusi\'on y Arrastre}{21}{subsubsection.10.1.2}%
+\contentsline {subsubsection}{\numberline {10.1.3}9.3 --- La Ecuaci\'on de Shockley}{21}{subsubsection.10.1.3}%
+\contentsline {section}{\numberline {11}Sesi\'on 10 --- El Transistor MOSFET y las Compuertas CMOS}{23}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Contenidos}{23}{subsection.11.1}%
+\contentsline {subsubsection}{\numberline {11.1.1}10.1 --- Estructura y Operaci\'on del MOSFET}{23}{subsubsection.11.1.1}%
+\contentsline {subsubsection}{\numberline {11.1.2}10.2 --- Derivaci\'on de la Ecuaci\'on de Corriente}{23}{subsubsection.11.1.2}%
+\contentsline {subsubsection}{\numberline {11.1.3}10.3 --- Implementaci\'on L\'ogica CMOS}{23}{subsubsection.11.1.3}%
+\contentsline {section}{\numberline {12}Sesi\'on 11 --- Sistemas Din\'amicos y Filtros en el Dominio $s$}{25}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Contenidos}{25}{subsection.12.1}%
+\contentsline {subsubsection}{\numberline {12.1.1}11.1 --- Modelado Din\'amico de Circuitos}{25}{subsubsection.12.1.1}%
+\contentsline {subsubsection}{\numberline {12.1.2}11.2 --- La Transformada de Laplace}{25}{subsubsection.12.1.2}%
+\contentsline {subsubsection}{\numberline {12.1.3}11.3 --- El Plano $s$ y Funciones de Transferencia}{25}{subsubsection.12.1.3}%
+\contentsline {subsubsection}{\numberline {12.1.4}11.4 --- Filtros Activos de Segundo Orden}{25}{subsubsection.12.1.4}%
+\contentsline {section}{\numberline {13}Bibliograf\'ia Consolidada}{27}{section.13}%
+\contentsline {section}{\numberline {14}Pol\'iticas del Curso}{29}{section.14}%
